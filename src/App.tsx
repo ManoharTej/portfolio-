@@ -40,6 +40,7 @@ const glowAnimation = `
 const App = () => {
   const currentSubtitle = useAppStore(state => state.currentSubtitle);
   const isIntroFinished = useAppStore(state => state.isIntroFinished);
+  const isContactCardVisible = useAppStore(state => state.isContactCardVisible);
   const setIsIntroFinished = useAppStore(state => state.setIsIntroFinished);
   const isSittingAtTable = useAppStore(state => state.isSittingAtTable);
   const setIsAskQuestionModalOpen = useAppStore(state => state.setIsAskQuestionModalOpen);
@@ -280,8 +281,8 @@ const App = () => {
           display: 'flex',
           gap: '16px',
           alignItems: 'center',
-          pointerEvents: 'auto',
-          opacity: currentSubtitle || !isIntroFinished || useAppStore.getState().isContactCardVisible ? 0 : 1, // Hide when talking, intro isn't done, or contact card is visible
+          pointerEvents: currentSubtitle || !isIntroFinished || isContactCardVisible ? 'none' : 'auto',
+          opacity: currentSubtitle || !isIntroFinished || isContactCardVisible ? 0 : 1, // Hide when talking, intro isn't done, or contact card is visible
           transition: 'opacity 0.3s ease',
           zIndex: 99999990
         }}>
