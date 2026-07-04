@@ -18,9 +18,8 @@ const ContactCard = () => {
       if (cardRef.current.scale.x < 1) {
         cardRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), delta * 5);
       }
-      // Gentle floating/hover effect for the card
-      timeRef.current += delta;
-      cardRef.current.position.y = 0.965 + Math.sin(timeRef.current * 3) * 0.005;
+      // Fixed on the table, no floating
+      cardRef.current.position.y = 0.962;
     } else {
       cardRef.current.scale.set(0, 0, 0);
     }
@@ -29,8 +28,8 @@ const ContactCard = () => {
   return (
     <mesh 
       ref={cardRef} 
-      position={[0.4, 0.965, -0.4]} 
-      rotation={[-Math.PI / 2, 0, -0.1]}
+      position={[0.4, 0.962, -0.4]} 
+      rotation={[0, -0.1, 0]}
       scale={[0, 0, 0]}
       onClick={(e) => {
         if (!isContactCardVisible) return;
@@ -42,7 +41,7 @@ const ContactCard = () => {
       castShadow
       receiveShadow
     >
-      <boxGeometry args={[0.09, 0.05, 0.001]} />
+      <boxGeometry args={[0.2, 0.002, 0.12]} />
       {/* Glowing yellow material */}
       <meshStandardMaterial color="#fef08a" emissive="#eab308" emissiveIntensity={0.6} roughness={0.5} />
     </mesh>

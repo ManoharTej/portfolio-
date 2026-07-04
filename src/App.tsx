@@ -179,7 +179,7 @@ const App = () => {
             gl.toneMapping = 4; // ACESFilmicToneMapping
             gl.toneMappingExposure = 1.3;
           }}
-          dpr={[1, 1]}
+          dpr={[1, 2]}
         >
           {/* Atmospheric Anime Fog */}
           <fog attach="fog" args={['#8fb8ed', 100, 15000]} />

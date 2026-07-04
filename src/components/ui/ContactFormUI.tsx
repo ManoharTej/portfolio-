@@ -14,7 +14,6 @@ export const ContactFormUI = () => {
     e.preventDefault();
     console.log("Feedback sent:", formData);
     setIsContactFormOpen(false);
-    setIsEndingSequence(true);
   };
 
   return (

@@ -8,6 +8,7 @@ import { IslandNavbar } from './IslandUI';
 export function GameHUD() {
   const introStage = useAppStore(state => state.introStage);
   const isCameraDropComplete = useAppStore(state => state.isCameraDropComplete);
+  const hasTeleported = useAppStore(state => state.hasTeleported);
 
   // We only show the HUD after the cinematic welcome screen finishes and camera finishes dropping
   if (introStage !== 'complete') return null;
@@ -29,11 +30,11 @@ export function GameHUD() {
         <>
           {/* Enable pointer events on the interactive HUD elements */}
           <div style={{ pointerEvents: 'auto' }}>
-            <MiniMap />
+            {hasTeleported && <MiniMap />}
             <AudioControls />
           </div>
           
-          <QuestTracker />
+          {hasTeleported && <QuestTracker />}
         </>
       )}
     </div>
