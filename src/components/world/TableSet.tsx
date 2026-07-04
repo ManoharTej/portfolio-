@@ -17,8 +17,8 @@ const ContactCard = () => {
       if (cardRef.current.scale.x < 1) {
         cardRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), delta * 5);
       }
-      // Fixed on the bench, no floating
-      cardRef.current.position.y = 0.55;
+      // Fixed on the table top, no floating
+      cardRef.current.position.y = 0.962;
     } else {
       cardRef.current.scale.set(0, 0, 0);
     }
@@ -27,7 +27,7 @@ const ContactCard = () => {
   return (
     <mesh 
       ref={cardRef} 
-      position={[-0.4, 0.55, -0.6]} 
+      position={[0.2, 0.962, 0.2]} 
       rotation={[0, -0.1, 0]}
       scale={[0, 0, 0]}
       onClick={(e) => {
