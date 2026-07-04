@@ -226,6 +226,14 @@ const App = () => {
                 scale={hasTeleported ? 1.5 : 1.15} 
               />
 
+              {/* Ocean walking floor at water surface level */}
+              <RigidBody type="fixed" position={[0, -0.5, 0]}>
+                <mesh>
+                  <boxGeometry args={[10000, 1, 10000]} />
+                  <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+                </mesh>
+              </RigidBody>
+
               {/* Fallback bottom floor */}
               <RigidBody type="fixed" position={[0, -50.3, 0]}>
                 <mesh>
