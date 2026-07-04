@@ -5,6 +5,7 @@ import { VRMLoaderPlugin, VRM, VRMUtils } from '@pixiv/three-vrm';
 import { useAppStore } from '../../store/useAppStore';
 import * as THREE from 'three';
 import { RigidBody, CapsuleCollider, type RapierRigidBody } from '@react-three/rapier';
+import { Html } from '@react-three/drei';
 
 export interface DBVRMProps {
   position?: [number, number, number];
@@ -604,6 +605,26 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
         visible={!focusedShelfTier}
       >
         {vrm && <primitive object={vrm.scene} />}
+        {vrm && isIntroFinished && !isEndingSequence && (
+          <Html center position={[0, 1.75, 0]}>
+            <div style={{
+              backgroundColor: 'rgba(239, 68, 68, 0.9)', // Red box
+              color: 'white',
+              padding: '2px 8px',
+              borderRadius: '4px',
+              fontFamily: '"Outfit", sans-serif',
+              fontSize: '12px',
+              fontWeight: 700,
+              border: '1px solid rgba(255, 255, 255, 0.5)',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.5)',
+              whiteSpace: 'nowrap',
+              pointerEvents: 'none',
+              letterSpacing: '1px'
+            }}>
+              Manohar
+            </div>
+          </Html>
+        )}
       </group>
     </RigidBody>
   );

@@ -23,7 +23,6 @@ import { GameHUD } from './components/ui/GameHUD';
 import { DBVRM } from './components/characters/DBVRM';
 import { skillsData, toolsData, certsData } from './data/skillsData';
 import { MediaGem } from './components/world/MediaGem';
-import { IslandNavbar } from './components/ui/IslandUI';
 import { ContactFormUI } from './components/ui/ContactFormUI';
 import { EndScreenUI } from './components/ui/EndScreenUI';
 
@@ -180,7 +179,7 @@ const App = () => {
             gl.toneMapping = 4; // ACESFilmicToneMapping
             gl.toneMappingExposure = 1.3;
           }}
-          dpr={[1, 2]}
+          dpr={[1, 1]}
         >
           {/* Atmospheric Anime Fog */}
           <fog attach="fog" args={['#8fb8ed', 100, 15000]} />
@@ -282,7 +281,7 @@ const App = () => {
           gap: '16px',
           alignItems: 'center',
           pointerEvents: 'auto',
-          opacity: currentSubtitle || !isIntroFinished ? 0 : 1, // Hide when talking or intro isn't done
+          opacity: currentSubtitle || !isIntroFinished || useAppStore.getState().isContactCardVisible ? 0 : 1, // Hide when talking, intro isn't done, or contact card is visible
           transition: 'opacity 0.3s ease',
           zIndex: 99999990
         }}>

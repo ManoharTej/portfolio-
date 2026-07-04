@@ -72,7 +72,7 @@ export const ReturnTeleportBeam = () => {
       setHasTeleported(false); 
       setIsTeleporting(false);
       setSittingAtTable(true);
-      setCurrentQuestId(null);
+      setCurrentQuestId('click_contact_card');
       
       // Trigger the contact card sequence!
       useAppStore.getState().setIsContactCardVisible(true);

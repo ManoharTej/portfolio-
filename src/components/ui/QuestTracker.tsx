@@ -12,8 +12,8 @@ export function QuestTracker() {
   const viewedProjects = useAppStore(state => state.viewedProjects);
   const isSittingAtTable = useAppStore(state => state.isSittingAtTable);
   
-  // Hide completely when sitting at the bench
-  if (isSittingAtTable) return null;
+  // Hide when sitting at the bench, UNLESS the quest is about talking or the contact card
+  if (isSittingAtTable && currentQuestId !== 'talk_to_avatar' && currentQuestId !== 'click_contact_card') return null;
   if (!currentQuestId && !currentHint) return null;
 
   let description = "";
@@ -37,6 +37,8 @@ export function QuestTracker() {
     description = "Wade through the water and reach the bench. Use W, A, S, D to walk and Space to jump.";
   } else if (currentQuestId === 'talk_to_avatar') {
     description = "You've reached the table! Click 'Ask Question' to speak to the AI clone.";
+  } else if (currentQuestId === 'click_contact_card') {
+    description = "Click the glowing yellow card on the table to view contact info.";
   } else if (currentQuestId === 'explore_island') {
     description = "Take your time and enjoy the scenery!";
   }

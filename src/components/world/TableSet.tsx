@@ -4,14 +4,14 @@ import * as THREE from 'three';
 import { RigidBody, CuboidCollider } from '@react-three/rapier';
 import { useAppStore } from '../../store/useAppStore';
 
-import { Text } from '@react-three/drei';
+
 const ContactCard = () => {
   const isContactCardVisible = useAppStore(state => state.isContactCardVisible);
   const setIsContactFormOpen = useAppStore(state => state.setIsContactFormOpen);
   const cardRef = useRef<THREE.Mesh>(null);
   const timeRef = useRef(0);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!cardRef.current) return;
     
     if (isContactCardVisible) {
@@ -29,8 +29,8 @@ const ContactCard = () => {
   return (
     <mesh 
       ref={cardRef} 
-      position={[0, 0.96, 0.2]} 
-      rotation={[-Math.PI / 2, 0, 0]}
+      position={[0.4, 0.965, -0.4]} 
+      rotation={[-Math.PI / 2, 0, -0.1]}
       scale={[0, 0, 0]}
       onClick={(e) => {
         if (!isContactCardVisible) return;
@@ -42,19 +42,9 @@ const ContactCard = () => {
       castShadow
       receiveShadow
     >
-      <boxGeometry args={[0.4, 0.25, 0.01]} />
-      {/* Realistic paper material */}
-      <meshStandardMaterial color="#f8fafc" roughness={1} metalness={0.1} />
-      <Text
-        position={[0, 0, 0.006]}
-        fontSize={0.05}
-        color="#0f172a"
-        anchorX="center"
-        anchorY="middle"
-        font="https://fonts.gstatic.com/s/outfit/v36/QGYvz_MVcBeNP4NJtEtq.woff"
-      >
-        CONTACT
-      </Text>
+      <boxGeometry args={[0.09, 0.05, 0.001]} />
+      {/* Glowing yellow material */}
+      <meshStandardMaterial color="#fef08a" emissive="#eab308" emissiveIntensity={0.6} roughness={0.5} />
     </mesh>
   );
 };

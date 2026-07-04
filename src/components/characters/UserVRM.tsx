@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { VRMLoaderPlugin, VRM, VRMUtils } from '@pixiv/three-vrm';
 import { RigidBody, CapsuleCollider } from '@react-three/rapier';
-import { useKeyboardControls } from '@react-three/drei';
+import { useKeyboardControls, Html } from '@react-three/drei';
 import { Controls } from '../../controls';
 import { useAppStore } from '../../store/useAppStore';
 
@@ -22,6 +22,9 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
   const characterGroup = useRef<THREE.Group>(null);
   const timeRef = useRef(0);
   
+  const visitorName = useAppStore((state) => state.visitorName);
+  const isIntroFinished = useAppStore((state) => state.isIntroFinished);
+  const isEndingSequence = useAppStore((state) => state.isEndingSequence);
   const isSittingAtTable = useAppStore((state) => state.isSittingAtTable);
   const isAskQuestionModalOpen = useAppStore((state) => state.isAskQuestionModalOpen);
   const isWriting = useAppStore((state) => state.isWriting);
@@ -339,7 +342,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
 
         let targetPos: THREE.Vector3 | null = null;
         if (store.isAutoWalking) {
-          const path = navigationPaths[store.currentQuestId];
+          const path = store.currentQuestId ? navigationPaths[store.currentQuestId] : null;
           if (path && pathIndexRef.current < path.length) {
             targetPos = path[pathIndexRef.current];
           }
@@ -368,7 +371,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
           const dist = toTarget.length();
           if (dist < 1.0) {
             pathIndexRef.current++;
-            if (pathIndexRef.current >= navigationPaths[store.currentQuestId].length) {
+            if (store.currentQuestId && pathIndexRef.current >= navigationPaths[store.currentQuestId].length) {
               store.setIsAutoWalking(false);
               
               // If arriving at the skills shelf, snap rotation to face it perfectly for the camera
@@ -475,6 +478,25 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
         <CapsuleCollider args={[0.6, 0.3]} position={[0, 0.9, 0]} />
         <group ref={characterGroup} position={[0, sitting ? -0.45 : (hasTeleported ? 0.65 : 0), 0]}>
           {vrm && <primitive object={vrm.scene} />}
+          {vrm && isIntroFinished && !isEndingSequence && (
+            <Html center position={[0, 1.75, 0]}>
+              <div style={{
+                backgroundColor: 'rgba(56, 189, 248, 0.9)', // Blue box for user
+                padding: '4px 12px',
+                borderRadius: '6px',
+                color: 'white',
+                fontFamily: '"Outfit", sans-serif',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.5)',
+                whiteSpace: 'nowrap',
+                pointerEvents: 'none',
+                letterSpacing: '1px'
+              }}>
+                {visitorName || 'Player'}
+              </div>
+            </Html>
+          )}
         </group>
       </RigidBody>
     );

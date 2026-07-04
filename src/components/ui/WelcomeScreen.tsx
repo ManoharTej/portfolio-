@@ -172,7 +172,7 @@ export const WelcomeScreen = () => {
 
   // Generate 3 distinct groups of 3 birds in V-formations
   const generateBirds = () => {
-    const birds = [];
+    const birds: any[] = [];
     const groups = [
       { bx: 250, by: 120, scale: 0.6 }, // Left group
       { bx: 500, by: 100, scale: 0.4 }, // Center group (smaller, further away)

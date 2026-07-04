@@ -30,6 +30,7 @@ export function GameHUD() {
           {/* Enable pointer events on the interactive HUD elements */}
           <div style={{ pointerEvents: 'auto' }}>
             <MiniMap />
+            <AudioControls />
           </div>
           
           <QuestTracker />

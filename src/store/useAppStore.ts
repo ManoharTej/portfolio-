@@ -71,8 +71,8 @@ interface AppState {
   isCameraFlyAway: boolean;
   setIsCameraFlyAway: (v: boolean) => void;
 
-  currentQuestId: 'reach_bench' | 'talk_to_avatar' | 'explore_island' | 'go_to_skills' | 'go_to_projects' | 'go_to_media' | 'go_to_contact' | null;
-  setCurrentQuestId: (questId: 'reach_bench' | 'talk_to_avatar' | 'explore_island' | 'go_to_skills' | 'go_to_projects' | 'go_to_media' | 'go_to_contact' | null) => void;
+  currentQuestId: 'reach_bench' | 'talk_to_avatar' | 'explore_island' | 'go_to_skills' | 'go_to_projects' | 'go_to_media' | 'go_to_contact' | 'click_contact_card' | null;
+  setCurrentQuestId: (questId: 'reach_bench' | 'talk_to_avatar' | 'explore_island' | 'go_to_skills' | 'go_to_projects' | 'go_to_media' | 'go_to_contact' | 'click_contact_card' | null) => void;
 
   currentHint: string | null;
   setCurrentHint: (hint: string | null) => void;

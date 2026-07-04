@@ -31,18 +31,33 @@ export const ContactFormUI = () => {
       zIndex: 999999,
       pointerEvents: 'auto'
     }}>
+      <style>
+        {`
+          @keyframes zoomInCard {
+            from {
+              transform: scale(0.5);
+              opacity: 0;
+            }
+            to {
+              transform: scale(0.9);
+              opacity: 1;
+            }
+          }
+        `}
+      </style>
       {/* Physical Visiting Card Style Container */}
       <div style={{
         backgroundColor: '#f8fafc',
         backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")', // subtle paper texture
         border: '1px solid #e2e8f0',
         borderRadius: '8px', // sharper corners like a real card
-        padding: '40px',
-        width: '600px',
+        padding: '30px',
+        width: '480px',
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.05)',
         color: '#0f172a', // dark text
         fontFamily: '"Inter", sans-serif',
-        position: 'relative'
+        position: 'relative',
+        animation: 'zoomInCard 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', borderBottom: '2px solid #e2e8f0', paddingBottom: '16px' }}>
           <div>
