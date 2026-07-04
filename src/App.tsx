@@ -215,7 +215,7 @@ const App = () => {
                 url="/user.vrm" 
                 position={[40, 5.00, 100]}
                 isPlayable={true}
-                isSitting={!hasTeleported}
+                isSitting={false}
               />
               
               {/* DBVRM is always mounted to prevent lag spikes. 
