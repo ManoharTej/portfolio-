@@ -1,0 +1,41 @@
+{
+  "name": "por",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@pixiv/three-vrm": "^3.5.4",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@react-three/postprocessing": "^2.16.2",
+    "@react-three/rapier": "^2.2.0",
+    "@types/animejs": "^3.1.12",
+    "@types/three": "^0.185.0",
+    "animejs": "^3.2.2",
+    "ecctrl": "^2.0.0",
+    "edge-tts-universal": "^1.4.0",
+    "gsap": "^3.15.0",
+    "leva": "^0.10.1",
+    "postprocessing": "^6.36.3",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-icons": "^5.7.0",
+    "three": "^0.167.0",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "oxlint": "^1.69.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.0"
+  }
+}
