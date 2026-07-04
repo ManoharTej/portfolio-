@@ -9,6 +9,7 @@ export function GameHUD() {
   const introStage = useAppStore(state => state.introStage);
   const isCameraDropComplete = useAppStore(state => state.isCameraDropComplete);
   const hasTeleported = useAppStore(state => state.hasTeleported);
+  const isSpeaking = useAppStore(state => state.isSpeaking);
 
   // We only show the HUD after the cinematic welcome screen finishes and camera finishes dropping
   if (introStage !== 'complete') return null;
@@ -30,11 +31,11 @@ export function GameHUD() {
         <>
           {/* Enable pointer events on the interactive HUD elements */}
           <div style={{ pointerEvents: 'auto' }}>
-            {hasTeleported && <MiniMap />}
+            {!isSpeaking && <MiniMap />}
             <AudioControls />
           </div>
           
-          {hasTeleported && <QuestTracker />}
+          {!isSpeaking && <QuestTracker />}
         </>
       )}
     </div>
