@@ -8,7 +8,6 @@ import { IslandNavbar } from './IslandUI';
 export function GameHUD() {
   const introStage = useAppStore(state => state.introStage);
   const isCameraDropComplete = useAppStore(state => state.isCameraDropComplete);
-  const hasTeleported = useAppStore(state => state.hasTeleported);
   const isSpeaking = useAppStore(state => state.isSpeaking);
 
   // We only show the HUD after the cinematic welcome screen finishes and camera finishes dropping

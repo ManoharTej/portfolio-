@@ -9,7 +9,6 @@ const ContactCard = () => {
   const isContactCardVisible = useAppStore(state => state.isContactCardVisible);
   const setIsContactFormOpen = useAppStore(state => state.setIsContactFormOpen);
   const cardRef = useRef<THREE.Mesh>(null);
-  const timeRef = useRef(0);
 
   useFrame((_, delta) => {
     if (!cardRef.current) return;
