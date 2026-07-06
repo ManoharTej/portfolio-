@@ -69,6 +69,7 @@ export const FloatingIsland = () => {
   const islandRef = useRef<THREE.Group>(null);
   const crystalFocusPoint = useAppStore(state => state.crystalFocusPoint);
   const setCrystalFocusPoint = useAppStore(state => state.setCrystalFocusPoint);
+  const hasTeleported = useAppStore(state => state.hasTeleported);
 
   useEffect(() => {
     scene.traverse((node: any) => {
@@ -100,8 +101,8 @@ export const FloatingIsland = () => {
   return (
     <>
       <group position={[0, 40, 0]} scale={[5, 5, 5]}>
-      {/* Invisible Physics Collider (No Grass/Leaves) */}
-      <RigidBody type="fixed" colliders="trimesh" includeInvisible={true}>
+      {/* Invisible Physics Collider (No Grass/Leaves) - ONLY active when on the island! */}
+      <RigidBody type="fixed" colliders={hasTeleported ? "trimesh" : false} includeInvisible={true}>
          <primitive object={physicsScene} visible={false} />
       </RigidBody>
 
