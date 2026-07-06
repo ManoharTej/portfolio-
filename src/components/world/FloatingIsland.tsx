@@ -1,7 +1,7 @@
 import { useGLTF, Html } from '@react-three/drei';
 import { useRef, useEffect, useMemo } from 'react';
 import * as THREE from 'three';
-import { RigidBody, CylinderCollider } from '@react-three/rapier';
+import { RigidBody } from '@react-three/rapier';
 import { useAppStore } from '../../store/useAppStore';
 import { FaLinkedin, FaGithub, FaFilePdf, FaEnvelope, FaTimes } from 'react-icons/fa';
 
@@ -101,10 +101,12 @@ export const FloatingIsland = () => {
   return (
     <>
       <group position={[0, 40, 0]} scale={[5, 5, 5]}>
-      {/* Always-on physics so teleporting is instant and solid */}
-      <RigidBody type="fixed" colliders="trimesh" includeInvisible={true}>
-         <primitive object={physicsScene} visible={false} />
-      </RigidBody>
+      {/* Physics Collider - ONLY mounted when teleported so roots don't hit player on ocean */}
+      {hasTeleported && (
+        <RigidBody type="fixed" colliders="trimesh" includeInvisible={true}>
+           <primitive object={physicsScene} visible={false} />
+        </RigidBody>
+      )}
 
       {/* Visual Scene */}
       <group ref={islandRef}>
@@ -199,14 +201,6 @@ export const FloatingIsland = () => {
             </div>
           </Html>
         </group>
-      )}
-
-      {/* Invisible ocean-level wall to prevent player from walking into the downward-sloping roots */}
-      {!hasTeleported && (
-        <RigidBody type="fixed" position={[0, 5, 0]}>
-           {/* halfHeight: 10 (spans Y=-5 to 15), radius: 20 */}
-           <CylinderCollider args={[10, 20]} />
-        </RigidBody>
       )}
     </>
   );
