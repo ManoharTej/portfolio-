@@ -255,7 +255,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
   useEffect(() => {
     if (hasTeleported && rigidBody.current) {
       teleportTimerRef.current = 0;
-      rigidBody.current.setTranslation({ x: 5, y: 46, z: -10 }, true);
+      rigidBody.current.setTranslation({ x: 5, y: 55, z: -10 }, true);
       rigidBody.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
       rigidBody.current.setAngvel({ x: 0, y: 0, z: 0 }, true);
 
@@ -269,7 +269,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
         if (teleportTimerRef.current < 2.5) {
           teleportTimerRef.current += delta;
           // Hold the character in the sky while the camera flies over and the beam forms
-          rigidBody.current.setTranslation({ x: 5, y: 46, z: -10 }, true);
+          rigidBody.current.setTranslation({ x: 5, y: 55, z: -10 }, true);
           rigidBody.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
           rigidBody.current.setAngvel({ x: 0, y: 0, z: 0 }, true);
           (window as any).characterPosition = rigidBody.current.translation();
@@ -437,7 +437,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
 
         // Island Fall Respawn
         if (hasTeleported && pos.y < 30) {
-           rigidBody.current.setTranslation({ x: 5, y: 55, z: -10 }, true);
+           rigidBody.current.setTranslation({ x: 5, y: 46, z: -10 }, true);
            rigidBody.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
            store.setCurrentHint("Oops! You fell off the floating island. Be careful!");
            setTimeout(() => store.setCurrentHint(null), 5000);
