@@ -455,6 +455,18 @@ export const WelcomeScreen = () => {
           >
             DIVE IN
           </button>
+          
+          <div style={{
+            marginTop: '20px',
+            color: 'rgba(255, 255, 255, 0.6)',
+            fontSize: '12px',
+            fontFamily: '"Montserrat", sans-serif',
+            textAlign: 'center',
+            letterSpacing: '1px'
+          }}>
+            <p>⚠️ HIGH-QUALITY 3D ASSETS ⚠️</p>
+            <p>If you have a slow internet connection, please allow extra time for the 3D world to fully load, or connect to a faster network for the best experience.</p>
+          </div>
         </form>
       )}
     </div>
