@@ -326,7 +326,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
         }
 
         const isCurrentlyMoving = manualMove || store.isAutoWalking;
-        const speed = run ? 7.5 : 3.0;
+        const speed = run ? 8.0 : 4.5;
         const activeSpeed = store.isAutoWalking ? 5.0 : speed;
 
         // Reset path index when quest changes
@@ -476,7 +476,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
     return (
       <RigidBody ref={rigidBody} type={sitting ? 'kinematicPosition' : 'dynamic'} colliders={false} position={position} lockRotations ccd={true}>
         <CapsuleCollider args={[0.6, 0.3]} position={[0, 0.9, 0]} />
-        <group ref={characterGroup} position={[0, sitting ? -0.45 : (hasTeleported ? 0.65 : 0), 0]}>
+        <group ref={characterGroup} position={[0, sitting ? -0.45 : (hasTeleported ? 0.65 : -0.1), 0]}>
           {vrm && <primitive object={vrm.scene} />}
           {vrm && isIntroFinished && !isEndingSequence && (
             <Html center position={[0, 1.75, 0]}>
