@@ -87,8 +87,8 @@ export const FloatingIsland = () => {
     clone.traverse((node: any) => {
       if (node.isMesh) {
         const name = node.name.toLowerCase();
-        // ONLY remove small grass blades (grass.001, etc.) and leaves. Do NOT remove "grass top"!
-        if (name.match(/grass\.\d+/) || name.match(/fallen/)) {
+        // Do not remove grass from the optimized model!
+        if (name.match(/fallen/)) {
           toRemove.push(node);
         }
       }
