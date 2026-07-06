@@ -305,17 +305,10 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
           rigidBody.current.setTranslation({ x: 43, y: 1.5, z: 50 }, true);
         }
       } else {
-        // Proximity-based auto-sit: check distance to bench every frame
-        const pos = rigidBody.current.translation();
-        const dx = pos.x - 40.6;
-        const dz = pos.z - 50.0;
-        const distToBench = Math.sqrt(dx * dx + dz * dz);
+        // Quest update: when we reach bench (sensor triggers sitting), update quest
         const store = useAppStore.getState();
-        if (distToBench < 2.0 && !hasTeleported) {
-          if (!store.isSittingAtTable) store.setSittingAtTable(true);
-          if (store.currentQuestId === 'reach_bench') {
-            store.setCurrentQuestId('talk_to_avatar');
-          }
+        if (store.isSittingAtTable && store.currentQuestId === 'reach_bench') {
+          store.setCurrentQuestId('talk_to_avatar');
         }
         
         const { forward, backward, leftward, rightward, run, jump } = get();
