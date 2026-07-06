@@ -88,8 +88,8 @@ export const FloatingIsland = () => {
     clone.traverse((node: any) => {
       if (node.isMesh) {
         const name = node.name.toLowerCase();
-        // ONLY remove small grass blades (grass.001, etc.) and leaves. Do NOT remove "grass top"!
-        if (name.match(/grass\.\d+/) || name.match(/fallen/)) {
+        // ONLY remove small grass blades, leaves, and the vines/roots that reach down to the ocean.
+        if (name.match(/grass\.\d+/) || name.match(/fallen/) || name.includes('vines') || name.includes('roots')) {
           toRemove.push(node);
         }
       }
@@ -101,8 +101,8 @@ export const FloatingIsland = () => {
   return (
     <>
       <group position={[0, 40, 0]} scale={[5, 5, 5]}>
-      {/* Invisible Physics Collider (No Grass/Leaves) - ONLY active when on the island! */}
-      <RigidBody type="fixed" colliders={hasTeleported ? "trimesh" : false} includeInvisible={true}>
+      {/* Invisible Physics Collider (No Grass/Leaves) */}
+      <RigidBody type="fixed" colliders="trimesh" includeInvisible={true}>
          <primitive object={physicsScene} visible={false} />
       </RigidBody>
 
