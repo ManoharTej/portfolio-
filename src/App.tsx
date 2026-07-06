@@ -221,7 +221,7 @@ const App = () => {
               {/* DBVRM is always mounted to prevent lag spikes. 
                   It starts at the table [39.4, 0.4, 49.75] and teleports to the island [2, 45, -12] */}
               <DBVRM 
-                position={hasTeleported ? [2, 45, -12] : [39.4, 0.4, 49.75]} 
+                position={hasTeleported ? [2, 45.2, -12] : [39.4, 0.4, 49.75]} 
                 rotation={hasTeleported ? [0, Math.PI / 4, 0] : [0, Math.PI / 2, 0]} 
                 scale={hasTeleported ? 1.5 : 1.15} 
               />
@@ -367,6 +367,7 @@ const App = () => {
 
           <button 
             onClick={() => {
+              useAppStore.getState().setSittingAtTable(false);
               setIsTeleporting(true);
               useAppStore.getState().setCurrentQuestId('explore_island');
             }}
