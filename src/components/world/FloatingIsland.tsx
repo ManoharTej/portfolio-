@@ -1,7 +1,7 @@
 import { useGLTF, Html } from '@react-three/drei';
 import { useRef, useEffect, useMemo } from 'react';
 import * as THREE from 'three';
-import { RigidBody, interactionGroups } from '@react-three/rapier';
+import { RigidBody } from '@react-three/rapier';
 import { useAppStore } from '../../store/useAppStore';
 import { FaLinkedin, FaGithub, FaFilePdf, FaEnvelope, FaTimes } from 'react-icons/fa';
 
@@ -101,10 +101,12 @@ export const FloatingIsland = () => {
   return (
     <>
       <group position={[0, 40, 0]} scale={[5, 5, 5]}>
-      {/* Invisible Physics Collider (No Grass/Leaves) */}
-      <RigidBody type="fixed" colliders="trimesh" includeInvisible={true} collisionGroups={interactionGroups(1, [0])}>
-         <primitive object={physicsScene} visible={false} />
-      </RigidBody>
+      {/* Physics Collider - ONLY mounted when teleported so roots don't hit player on ocean */}
+      {hasTeleported && (
+        <RigidBody type="fixed" colliders="trimesh" includeInvisible={true}>
+           <primitive object={physicsScene} visible={false} />
+        </RigidBody>
+      )}
 
       {/* Visual Scene */}
       <group ref={islandRef}>
