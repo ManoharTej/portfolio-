@@ -27,7 +27,7 @@ const ContactCard = () => {
   return (
     <mesh 
       ref={cardRef} 
-      position={[0.2, 0.962, 0.2]} 
+      position={[0.25, 0.962, -0.5]} 
       rotation={[0, -0.1, 0]}
       scale={[0, 0, 0]}
       onClick={(e) => {
