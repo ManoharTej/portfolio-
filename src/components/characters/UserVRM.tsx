@@ -305,6 +305,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
           rigidBody.current.setTranslation({ x: 43, y: 1.5, z: 50 }, true);
         }
       } else {
+        const pos = rigidBody.current.translation();
         // Quest update: when we reach bench (sensor triggers sitting), update quest
         const store = useAppStore.getState();
         if (store.isSittingAtTable && store.currentQuestId === 'reach_bench') {
