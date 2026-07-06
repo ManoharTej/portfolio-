@@ -1,7 +1,7 @@
 import { useGLTF, Html } from '@react-three/drei';
 import { useRef, useEffect, useMemo } from 'react';
 import * as THREE from 'three';
-import { RigidBody } from '@react-three/rapier';
+import { RigidBody, interactionGroups } from '@react-three/rapier';
 import { useAppStore } from '../../store/useAppStore';
 import { FaLinkedin, FaGithub, FaFilePdf, FaEnvelope, FaTimes } from 'react-icons/fa';
 
@@ -88,8 +88,8 @@ export const FloatingIsland = () => {
     clone.traverse((node: any) => {
       if (node.isMesh) {
         const name = node.name.toLowerCase();
-        // ONLY remove small grass blades, leaves, and the vines/roots that reach down to the ocean.
-        if (name.match(/grass\.\d+/) || name.match(/fallen/) || name.includes('vines') || name.includes('roots')) {
+        // ONLY remove small grass blades (grass.001, etc.) and leaves. Do NOT remove "grass top"!
+        if (name.match(/grass\.\d+/) || name.match(/fallen/)) {
           toRemove.push(node);
         }
       }
@@ -102,7 +102,7 @@ export const FloatingIsland = () => {
     <>
       <group position={[0, 40, 0]} scale={[5, 5, 5]}>
       {/* Invisible Physics Collider (No Grass/Leaves) */}
-      <RigidBody type="fixed" colliders="trimesh" includeInvisible={true}>
+      <RigidBody type="fixed" colliders="trimesh" includeInvisible={true} collisionGroups={interactionGroups(1, [0])}>
          <primitive object={physicsScene} visible={false} />
       </RigidBody>
 

@@ -3,7 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { VRMLoaderPlugin, VRM, VRMUtils } from '@pixiv/three-vrm';
-import { RigidBody, CapsuleCollider } from '@react-three/rapier';
+import { RigidBody, CapsuleCollider, interactionGroups } from '@react-three/rapier';
 import { useKeyboardControls, Html } from '@react-three/drei';
 import { Controls } from '../../controls';
 import { useAppStore } from '../../store/useAppStore';
@@ -468,7 +468,15 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
 
   if (isPlayable) {
     return (
-      <RigidBody ref={rigidBody} type={sitting ? 'kinematicPosition' : 'dynamic'} colliders={false} position={position} lockRotations ccd={true}>
+      <RigidBody 
+        ref={rigidBody} 
+        type={sitting ? 'kinematicPosition' : 'dynamic'} 
+        colliders={false} 
+        position={position} 
+        lockRotations 
+        ccd={true}
+        collisionGroups={interactionGroups(0, hasTeleported ? [0, 1] : [0])}
+      >
         <CapsuleCollider args={[0.6, 0.3]} position={[0, 0.9, 0]} />
         <group ref={characterGroup} position={[0, sitting ? -0.45 : (hasTeleported ? 0.65 : -0.1), 0]}>
           {vrm && <primitive object={vrm.scene} />}
