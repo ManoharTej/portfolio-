@@ -96,7 +96,7 @@ export const TableSet = ({ position = [40, 0, 50], rotation = [0, Math.PI / 2, 0
           {/* Invisible Trigger Zone for Sitting - small so player must actually reach bench */}
           <RigidBody type="fixed" position={[0, 0.54, 0.6]}>
             <CuboidCollider 
-              args={[1.0, 0.4, 0.3]} 
+              args={[4.0, 0.4, 4.0]} 
               sensor 
               onIntersectionEnter={() => setSittingAtTable(true)}
             />
