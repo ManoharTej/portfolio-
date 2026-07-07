@@ -5,10 +5,25 @@ export const ContactFormUI = () => {
   const isContactFormOpen = useAppStore(state => state.isContactFormOpen);
   const setIsContactFormOpen = useAppStore(state => state.setIsContactFormOpen);
   const setIsEndingSequence = useAppStore(state => state.setIsEndingSequence);
+  const visitorEmail = useAppStore(state => state.visitorEmail);
+  const setVisitorEmail = useAppStore(state => state.setVisitorEmail);
 
   const [formData, setFormData] = useState({ name: '', email: '', feedback: '' });
+  const [isQrRevealed, setIsQrRevealed] = useState(false);
 
   if (!isContactFormOpen) return null;
+
+  const handleRevealQr = () => {
+    if (visitorEmail && visitorEmail.trim() !== '') {
+      setIsQrRevealed(true);
+    } else {
+      const email = window.prompt("Please enter your email to view the WhatsApp QR code:");
+      if (email && email.trim() !== '') {
+        setVisitorEmail(email);
+        setIsQrRevealed(true);
+      }
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -134,8 +149,10 @@ export const ContactFormUI = () => {
             border: '1px solid rgba(255,255,255,0.1)',
             backdropFilter: 'blur(5px)'
           }}>
-            {/* WhatsApp QR Code Placeholder - Ready for image replacement */}
-            <div style={{ 
+            {/* WhatsApp QR Code */}
+            <div 
+              onClick={handleRevealQr}
+              style={{ 
               width: '75px', 
               height: '75px', 
               background: 'rgba(0,0,0,0.4)', 
@@ -143,10 +160,29 @@ export const ContactFormUI = () => {
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center', 
-              border: '1px dashed rgba(255,255,255,0.3)',
-              marginBottom: '8px'
+              border: isQrRevealed ? '1px solid #4ade80' : '1px dashed rgba(255,255,255,0.3)',
+              marginBottom: '8px',
+              cursor: isQrRevealed ? 'default' : 'pointer',
+              overflow: 'hidden',
+              position: 'relative'
             }}>
-              <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '10px', textAlign: 'center', fontWeight: 600 }}>YOUR QR<br/>HERE</span>
+              <img 
+                src="/whatsapp.jpg" 
+                alt="WhatsApp QR" 
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  filter: isQrRevealed ? 'none' : 'blur(5px)',
+                  transition: 'filter 0.5s ease',
+                  opacity: isQrRevealed ? 1 : 0.6
+                }} 
+              />
+              {!isQrRevealed && (
+                <div style={{ position: 'absolute', color: 'white', fontSize: '9px', fontWeight: 800, textAlign: 'center', textShadow: '0px 1px 3px black' }}>
+                  TAP TO<br/>REVEAL
+                </div>
+              )}
             </div>
             <p style={{ margin: 0, fontSize: '10px', color: '#4ade80', fontWeight: 700, letterSpacing: '0.5px' }}>WHATSAPP</p>
           </div>
