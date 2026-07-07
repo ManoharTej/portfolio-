@@ -118,7 +118,7 @@ export const ContactFormUI = () => {
               boxSizing: 'border-box'
             }}>
               <img 
-                src="/whatsapp.jpg" 
+                src="/whatsapp.png" 
                 alt="WhatsApp QR" 
                 style={{
                   width: '100%',
