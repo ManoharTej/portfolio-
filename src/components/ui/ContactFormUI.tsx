@@ -100,13 +100,13 @@ export const ContactFormUI = () => {
             </p>
           </div>
           
-          <div style={{ width: '100px', padding: '8px', backgroundColor: 'white', borderRadius: '4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #cbd5e1', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', boxSizing: 'border-box' }}>
+          <div style={{ width: '130px', padding: '12px', backgroundColor: 'white', borderRadius: '6px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #cbd5e1', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', boxSizing: 'border-box' }}>
             {/* WhatsApp QR Code */}
             <div 
               onClick={handleRevealQr}
               style={{ 
-              width: '80px', 
-              height: '80px', 
+              width: '100px', 
+              height: '100px', 
               backgroundColor: '#f1f5f9', 
               display: 'flex', 
               alignItems: 'center', 
@@ -124,18 +124,19 @@ export const ContactFormUI = () => {
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
+                  transform: isQrRevealed ? 'scale(1.25)' : 'scale(1.25)', // Zoom in to crop black borders
                   filter: isQrRevealed ? 'none' : 'blur(5px)',
                   transition: 'filter 0.5s ease',
                   opacity: isQrRevealed ? 1 : 0.4
                 }} 
               />
               {!isQrRevealed && (
-                <div style={{ position: 'absolute', color: '#0f172a', fontSize: '10px', fontWeight: 800, textAlign: 'center' }}>
+                <div style={{ position: 'absolute', color: '#0f172a', fontSize: '11px', fontWeight: 800, textAlign: 'center' }}>
                   TAP TO<br/>REVEAL
                 </div>
               )}
             </div>
-            <p style={{ margin: '4px 0 0 0', fontSize: '10px', color: '#16a34a', fontWeight: 700 }}>WhatsApp</p>
+            <p style={{ margin: '6px 0 0 0', fontSize: '12px', color: '#16a34a', fontWeight: 700 }}>WhatsApp</p>
           </div>
         </div>
 
