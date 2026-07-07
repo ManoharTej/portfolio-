@@ -33,7 +33,6 @@ export const ContactFormUI = () => {
   };
 
   return (
-  return (
     <div style={{
       position: 'absolute',
       top: 0,
