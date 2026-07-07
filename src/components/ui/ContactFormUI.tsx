@@ -39,8 +39,7 @@ export const ContactFormUI = () => {
       left: 0,
       width: '100%',
       height: '100%',
-      backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      backdropFilter: 'blur(10px)',
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -51,116 +50,67 @@ export const ContactFormUI = () => {
         {`
           @keyframes zoomInCard {
             from {
-              transform: scale(0.9) translateY(20px);
+              transform: scale(0.5);
               opacity: 0;
             }
             to {
-              transform: scale(1) translateY(0);
+              transform: scale(0.9);
               opacity: 1;
             }
           }
-          .glass-input::placeholder {
-            color: rgba(255,255,255,0.4);
-          }
         `}
       </style>
-      
-      {/* Premium Glassmorphic Card */}
+      {/* Physical Visiting Card Style Container */}
       <div style={{
-        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.85) 100%)',
-        backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 255, 255, 0.15)',
-        borderRadius: '24px',
-        padding: '40px',
-        width: '520px',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.1)',
-        color: '#f8fafc',
-        fontFamily: '"Montserrat", sans-serif',
+        backgroundColor: '#f8fafc',
+        backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")', // subtle paper texture
+        border: '1px solid #e2e8f0',
+        borderRadius: '8px', // sharper corners like a real card
+        padding: '30px',
+        width: '480px',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.05)',
+        color: '#0f172a', // dark text
+        fontFamily: '"Inter", sans-serif',
         position: 'relative',
-        animation: 'zoomInCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+        animation: 'zoomInCard 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'
       }}>
-        {/* Glow effect behind the card */}
-        <div style={{
-          position: 'absolute',
-          top: '-1px', left: '-1px', right: '-1px', bottom: '-1px',
-          background: 'linear-gradient(135deg, rgba(96, 165, 250, 0.3), rgba(167, 139, 250, 0.3))',
-          borderRadius: '24px',
-          zIndex: -1,
-          filter: 'blur(20px)',
-          opacity: 0.6
-        }}></div>
-
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', borderBottom: '2px solid #e2e8f0', paddingBottom: '16px' }}>
           <div>
-            <h2 style={{ 
-              margin: 0, 
-              fontSize: '32px', 
-              fontWeight: 900, 
-              letterSpacing: '1px',
-              background: 'linear-gradient(to right, #60a5fa, #c084fc)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>MANOHAR TEJ</h2>
-            <p style={{ margin: '6px 0 0 0', fontSize: '12px', color: '#94a3b8', fontWeight: 700, letterSpacing: '2px' }}>SOFTWARE ENGINEER</p>
+            <h2 style={{ margin: 0, fontSize: '28px', color: '#0f172a', fontWeight: 800, letterSpacing: '-0.5px' }}>MANOHAR TEJ</h2>
+            <p style={{ margin: '4px 0 0 0', fontSize: '14px', color: '#64748b', fontWeight: 600, letterSpacing: '1px' }}>SOFTWARE ENGINEER</p>
           </div>
           <button 
             onClick={() => setIsContactFormOpen(false)}
             style={{ 
-              background: 'rgba(255,255,255,0.05)', 
-              border: '1px solid rgba(255,255,255,0.1)', 
-              borderRadius: '50%',
-              color: '#94a3b8', 
-              fontSize: '24px', 
-              width: '40px',
-              height: '40px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              background: 'none', border: 'none', color: '#94a3b8', fontSize: '28px', cursor: 'pointer' 
             }}
-            onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#fff'; }}
-            onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = '#94a3b8'; }}
           >
             ×
           </button>
         </div>
 
-        <div style={{ display: 'flex', gap: '24px', marginBottom: '36px', padding: '24px', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '16px', justifyContent: 'center' }}>
-            <p style={{ margin: 0, fontSize: '15px', color: '#e2e8f0', display: 'flex', alignItems: 'center', gap: '12px', fontWeight: 500 }}>
-              <span style={{ fontSize: '20px' }}>📧</span> manohartejkandula@gmail.com
+        <div style={{ display: 'flex', gap: '32px', marginBottom: '32px' }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center' }}>
+            <p style={{ margin: 0, fontSize: '15px', color: '#334155', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '18px' }}>📧</span> <strong>manohartejkandula@gmail.com</strong>
             </p>
-            <p style={{ margin: 0, fontSize: '15px', color: '#e2e8f0', display: 'flex', alignItems: 'center', gap: '12px', fontWeight: 500 }}>
-              <span style={{ fontSize: '20px' }}>📸</span> ma.nohar____
+            <p style={{ margin: 0, fontSize: '15px', color: '#334155', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '18px' }}>📸</span> <strong>ma.nohar____</strong>
             </p>
           </div>
           
-          <div style={{ 
-            width: '100px', 
-            padding: '10px', 
-            background: 'rgba(255,255,255,0.03)', 
-            borderRadius: '12px', 
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            border: '1px solid rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(5px)'
-          }}>
+          <div style={{ width: '100px', padding: '8px', backgroundColor: 'white', borderRadius: '4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #cbd5e1', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
             {/* WhatsApp QR Code */}
             <div 
               onClick={handleRevealQr}
               style={{ 
-              width: '75px', 
-              height: '75px', 
-              background: 'rgba(0,0,0,0.4)', 
-              borderRadius: '8px',
+              width: '80px', 
+              height: '80px', 
+              backgroundColor: '#f1f5f9', 
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center', 
-              border: isQrRevealed ? '1px solid #4ade80' : '1px dashed rgba(255,255,255,0.3)',
-              marginBottom: '8px',
+              border: isQrRevealed ? '1px solid #16a34a' : '1px dashed #94a3b8',
               cursor: isQrRevealed ? 'default' : 'pointer',
               overflow: 'hidden',
               position: 'relative'
@@ -174,115 +124,103 @@ export const ContactFormUI = () => {
                   objectFit: 'cover',
                   filter: isQrRevealed ? 'none' : 'blur(5px)',
                   transition: 'filter 0.5s ease',
-                  opacity: isQrRevealed ? 1 : 0.6
+                  opacity: isQrRevealed ? 1 : 0.4
                 }} 
               />
               {!isQrRevealed && (
-                <div style={{ position: 'absolute', color: 'white', fontSize: '9px', fontWeight: 800, textAlign: 'center', textShadow: '0px 1px 3px black' }}>
+                <div style={{ position: 'absolute', color: '#0f172a', fontSize: '10px', fontWeight: 800, textAlign: 'center' }}>
                   TAP TO<br/>REVEAL
                 </div>
               )}
             </div>
-            <p style={{ margin: 0, fontSize: '10px', color: '#4ade80', fontWeight: 700, letterSpacing: '0.5px' }}>WHATSAPP</p>
+            <p style={{ margin: '4px 0 0 0', fontSize: '10px', color: '#16a34a', fontWeight: 700 }}>WhatsApp</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <p style={{ margin: '0 0 4px 0', fontSize: '12px', color: '#94a3b8', fontWeight: 700, letterSpacing: '1.5px' }}>LEAVE A MESSAGE</p>
+          <p style={{ margin: '0 0 4px 0', fontSize: '13px', color: '#64748b', fontWeight: 700, letterSpacing: '0.5px' }}>LEAVE A MESSAGE</p>
           
           <div style={{ display: 'flex', gap: '16px' }}>
             <input 
               type="text" 
-              className="glass-input"
               placeholder="Your Name" 
               required
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
               style={{
                 flex: 1,
-                padding: '14px 18px',
-                borderRadius: '12px',
-                border: '1px solid rgba(255,255,255,0.1)',
-                backgroundColor: 'rgba(255,255,255,0.05)',
-                color: '#fff',
+                padding: '12px 16px',
+                borderRadius: '4px',
+                border: '1px solid #cbd5e1',
+                backgroundColor: 'white',
+                color: '#0f172a',
                 fontSize: '15px',
-                fontFamily: '"Montserrat", sans-serif',
-                outline: 'none',
-                transition: 'all 0.3s ease'
+                fontFamily: '"Inter", sans-serif',
+                boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)'
               }}
-              onFocus={e => e.target.style.borderColor = '#60a5fa'}
-              onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
             />
             <input 
               type="email" 
-              className="glass-input"
               placeholder="Your Email" 
               required
               value={formData.email}
               onChange={(e) => setFormData({...formData, email: e.target.value})}
               style={{
                 flex: 1,
-                padding: '14px 18px',
-                borderRadius: '12px',
-                border: '1px solid rgba(255,255,255,0.1)',
-                backgroundColor: 'rgba(255,255,255,0.05)',
-                color: '#fff',
+                padding: '12px 16px',
+                borderRadius: '4px',
+                border: '1px solid #cbd5e1',
+                backgroundColor: 'white',
+                color: '#0f172a',
                 fontSize: '15px',
-                fontFamily: '"Montserrat", sans-serif',
-                outline: 'none',
-                transition: 'all 0.3s ease'
+                fontFamily: '"Inter", sans-serif',
+                boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)'
               }}
-              onFocus={e => e.target.style.borderColor = '#60a5fa'}
-              onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
             />
           </div>
           <textarea 
-            className="glass-input"
             placeholder="Share your thoughts about this portfolio..." 
             rows={3}
             required
             value={formData.feedback}
             onChange={(e) => setFormData({...formData, feedback: e.target.value})}
             style={{
-              padding: '14px 18px',
-              borderRadius: '12px',
-              border: '1px solid rgba(255,255,255,0.1)',
-              backgroundColor: 'rgba(255,255,255,0.05)',
-              color: '#fff',
+              padding: '12px 16px',
+              borderRadius: '4px',
+              border: '1px solid #cbd5e1',
+              backgroundColor: 'white',
+              color: '#0f172a',
               fontSize: '15px',
-              fontFamily: '"Montserrat", sans-serif',
-              outline: 'none',
+              fontFamily: '"Inter", sans-serif',
               resize: 'none',
-              transition: 'all 0.3s ease'
+              boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)'
             }}
-            onFocus={e => e.target.style.borderColor = '#60a5fa'}
-            onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
           />
           
           <button 
             type="submit"
             style={{
-              marginTop: '16px',
-              padding: '18px',
-              borderRadius: '12px',
+              marginTop: '12px',
+              padding: '16px',
+              borderRadius: '4px',
               border: 'none',
-              background: 'linear-gradient(to right, #3b82f6, #8b5cf6)',
+              backgroundColor: '#0f172a',
               color: 'white',
-              fontSize: '16px',
-              fontWeight: 800,
-              letterSpacing: '2px',
-              fontFamily: '"Montserrat", sans-serif',
+              fontSize: '15px',
+              fontWeight: 700,
+              letterSpacing: '1px',
+              fontFamily: '"Inter", sans-serif',
               cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 15px rgba(59, 130, 246, 0.4)'
+              transition: 'all 0.2s',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 6px 20px rgba(59, 130, 246, 0.6)';
+              e.currentTarget.style.backgroundColor = '#334155';
+              e.currentTarget.style.transform = 'translateY(-1px)';
             }}
             onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#0f172a';
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 15px rgba(59, 130, 246, 0.4)';
             }}
           >
             FINISH JOURNEY
