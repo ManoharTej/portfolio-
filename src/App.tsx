@@ -2,7 +2,7 @@ import { Canvas } from '@react-three/fiber';
 import { Suspense, useMemo, useEffect } from 'react';
 import { Ocean } from './components/world/Ocean';
 import { Sky } from './components/world/Sky';
-import { KeyboardControls, Loader } from '@react-three/drei';
+import { KeyboardControls } from '@react-three/drei';
 import { Physics, RigidBody } from '@react-three/rapier';
 import { UserVRM } from './components/characters/UserVRM';
 import { CameraController } from './components/world/CameraController';
@@ -584,14 +584,6 @@ const App = () => {
       
       {/* Inject Keyframe Styles */}
       <style>{glowAnimation}</style>
-      
-      {/* 3D Asset Loading Screen */}
-      <Loader 
-        containerStyles={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' }}
-        innerStyles={{ background: 'rgba(255, 255, 255, 0.1)', height: '8px', borderRadius: '4px' }}
-        barStyles={{ background: '#38bdf8', height: '8px', borderRadius: '4px' }}
-        dataInterpolation={(p) => `Loading World: ${p.toFixed(0)}%`}
-      />
     </div>
   );
 };
