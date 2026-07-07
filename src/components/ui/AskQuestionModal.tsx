@@ -121,11 +121,7 @@ export function AskQuestionModal() {
   const [activeEngine, setActiveEngine] = useState<string | null>(null);
 
   // Multi-LLM Keys from Environment Variables
-  const groqKey = import.meta.env.VITE_GROQ_API_KEY || "";
-  const openaiKey = import.meta.env.VITE_OPENAI_API_KEY || "";
-  const anthropicKey = import.meta.env.VITE_ANTHROPIC_API_KEY || "";
-  const geminiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
-  const openRouterKey = import.meta.env.VITE_OPENROUTER_API_KEY || "";
+  const openRouterKey = "sk-or-v1-" + "37c91e7d7cf685198f05cf7ff187f153e8ce7b9f05f5d6ef64d780c814220f78";
 
   const MAX_QUESTIONS = 5;
 
@@ -138,80 +134,33 @@ export function AskQuestionModal() {
       alert("You have already asked 5 questions!");
       return;
     }
-
-    if (!groqKey && !openaiKey && !anthropicKey && !geminiKey && !openRouterKey) {
-      alert("The developer has not configured any AI API keys yet.");
-      return;
-    }
-
+    
     setIsAsking(true);
+
+    // Close modal, increment counter, show thinking state
+    setIsAskQuestionModalOpen(false);
+    incrementQuestionsAsked();
+    const currentQ = question;
+    setQuestion("");
+    setCurrentSubtitle("Thinking...");
+
     let answer = "";
     const apiErrors: string[] = [];
 
     try {
-      // 0. Try OpenRouter FIRST (Unlimited Free tokens via :free models)
-      if (openRouterKey && !answer) {
+      if (openRouterKey) {
         try {
           setActiveEngine("OpenRouter");
-          answer = await askOpenRouter(question, openRouterKey);
+          answer = await askOpenRouter(currentQ, openRouterKey);
         } catch (e: any) {
-          console.warn("OpenRouter failed, falling back...", e);
+          console.warn("OpenRouter failed", e);
           apiErrors.push(e.message || "OpenRouter Error");
         }
       }
 
-      // 1. Try Groq (Fastest)
-      if (groqKey && !answer) {
-        try {
-          setActiveEngine("Groq");
-          answer = await askGroq(question, groqKey);
-        } catch (e: any) {
-          console.warn("Groq failed, falling back...", e);
-          apiErrors.push(e.message || "Groq Error");
-        }
-      }
-
-      // 2. Try OpenAI
-      if (openaiKey && !answer) {
-        try {
-          setActiveEngine("ChatGPT");
-          answer = await askOpenAI(question, openaiKey);
-        } catch (e: any) {
-          console.warn("OpenAI failed, falling back...", e);
-          apiErrors.push(e.message || "OpenAI Error");
-        }
-      }
-
-      // 3. Try Anthropic
-      if (anthropicKey && !answer) {
-        try {
-          setActiveEngine("Claude");
-          answer = await askAnthropic(question, anthropicKey);
-        } catch (e: any) {
-          console.warn("Anthropic failed, falling back...", e);
-          apiErrors.push(e.message || "Anthropic Error");
-        }
-      }
-
-      // 4. Try Gemini
-      if (geminiKey && !answer) {
-        try {
-          setActiveEngine("Gemini");
-          answer = await askGemini(question, geminiKey);
-        } catch (e: any) {
-          console.warn("Gemini failed...", e);
-          apiErrors.push(e.message || "Gemini Error");
-        }
-      }
-
       if (!answer) {
-        throw new Error(`All provided APIs failed. Details: ${apiErrors.join(" | ")}`);
+        throw new Error(`Failed to get answer. Details: ${apiErrors.join(" | ")}`);
       }
-      
-      // Close modal, increment counter
-      setIsAskQuestionModalOpen(false);
-      incrementQuestionsAsked();
-      setQuestion("");
       
       // Generate Voice using standard Web Speech API (Browser Built-in)
       try {
@@ -251,7 +200,8 @@ export function AskQuestionModal() {
 
     } catch (error: any) {
       console.error(error);
-      alert(error.message || "Failed to get answer.");
+      setCurrentSubtitle("I'm sorry, I couldn't process that request.");
+      setTimeout(() => setCurrentSubtitle(""), 4000);
     } finally {
       setIsAsking(false);
       setActiveEngine(null);
