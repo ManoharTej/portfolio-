@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         messages: [
           {
             role: "system",
-            content: `You are Manohar Tej's AI assistant. Keep responses under 30 words, friendly, and concise. Here is the context about Manohar: \n\n${context}`
+            content: `You are Manohar Tej's AI assistant. Keep responses under 50 words, friendly, and concise. Here is the context about Manohar: \n\n${context}`
           },
           { role: "user", content: question }
         ],
