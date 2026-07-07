@@ -246,46 +246,52 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
   const setIsEndingSequence = useAppStore(state => state.setIsEndingSequence);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
     if (isEndingSequence) {
-      const message = "Thank you for exploring my world and taking the time to know about me. I hope you enjoyed the experience, and please feel free to send me your feedback if possible!";
-      setCurrentSubtitle(message);
-      
-      try {
-        const audio = new Audio('/end.wav');
+      timeoutId = setTimeout(() => {
+        const message = "Thank you for exploring my world and taking the time to know about me. I hope you enjoyed the experience, and please feel free to send me your feedback if possible!";
+        setCurrentSubtitle(message);
         
-        audio.onplay = () => {
-          setIsSpeaking(true);
-          targetGesture.current = 1; // Explaining/welcoming gesture
-        };
-        
-        audio.onended = () => {
-          setIsSpeaking(false);
-          setTimeout(() => setCurrentSubtitle(""), 1000);
-          setIsEndingSequence(false);
-          setIsCameraFlyAway(true); // Trigger camera fly away
-        };
-        
-        audio.onerror = () => {
-          console.error("Ending audio failed to load");
-          setIsSpeaking(false);
-          setTimeout(() => setCurrentSubtitle(""), 1000);
-          setIsEndingSequence(false);
-          setIsCameraFlyAway(true);
-        };
-        
-        audio.play().catch(err => {
-          console.error("Audio play blocked", err);
-          setTimeout(() => {
-            setCurrentSubtitle("");
+        try {
+          const audio = new Audio('/end.wav');
+          
+          audio.onplay = () => {
+            setIsSpeaking(true);
+            targetGesture.current = 1; // Explaining/welcoming gesture
+          };
+          
+          audio.onended = () => {
+            setIsSpeaking(false);
+            setTimeout(() => setCurrentSubtitle(""), 1000);
+            setIsEndingSequence(false);
+            setIsCameraFlyAway(true); // Trigger camera fly away
+          };
+          
+          audio.onerror = () => {
+            console.error("Ending audio failed to load");
+            setIsSpeaking(false);
+            setTimeout(() => setCurrentSubtitle(""), 1000);
             setIsEndingSequence(false);
             setIsCameraFlyAway(true);
-          }, 4000);
-        });
-      } catch (err) {
-        console.error("Ending audio exception", err);
-        setIsCameraFlyAway(true);
-      }
+          };
+          
+          audio.play().catch(err => {
+            console.error("Audio play blocked", err);
+            setTimeout(() => {
+              setCurrentSubtitle("");
+              setIsEndingSequence(false);
+              setIsCameraFlyAway(true);
+            }, 4000);
+          });
+        } catch (err) {
+          console.error("Ending audio exception", err);
+          setIsCameraFlyAway(true);
+        }
+      }, 2000);
     }
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [isEndingSequence, setIsEndingSequence, setIsCameraFlyAway, setCurrentSubtitle, setIsSpeaking]);
 
   useFrame((state, delta) => {
