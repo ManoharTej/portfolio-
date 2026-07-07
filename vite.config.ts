@@ -11,4 +11,9 @@ export default defineConfig({
   optimizeDeps: {
     include: ['three', 'animejs/lib/anime.js'],
   },
+  server: {
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  }
 });
