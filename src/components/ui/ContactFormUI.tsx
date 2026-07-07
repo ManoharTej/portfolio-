@@ -67,11 +67,12 @@ export const ContactFormUI = () => {
         border: '1px solid #e2e8f0',
         borderRadius: '8px', // sharper corners like a real card
         padding: '30px',
-        width: '480px',
+        width: '520px',
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.05)',
         color: '#0f172a', // dark text
         fontFamily: '"Inter", sans-serif',
         position: 'relative',
+        boxSizing: 'border-box',
         animation: 'zoomInCard 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', borderBottom: '2px solid #e2e8f0', paddingBottom: '16px' }}>
@@ -99,7 +100,7 @@ export const ContactFormUI = () => {
             </p>
           </div>
           
-          <div style={{ width: '100px', padding: '8px', backgroundColor: 'white', borderRadius: '4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #cbd5e1', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+          <div style={{ width: '100px', padding: '8px', backgroundColor: 'white', borderRadius: '4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #cbd5e1', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', boxSizing: 'border-box' }}>
             {/* WhatsApp QR Code */}
             <div 
               onClick={handleRevealQr}
@@ -113,7 +114,8 @@ export const ContactFormUI = () => {
               border: isQrRevealed ? '1px solid #16a34a' : '1px dashed #94a3b8',
               cursor: isQrRevealed ? 'default' : 'pointer',
               overflow: 'hidden',
-              position: 'relative'
+              position: 'relative',
+              boxSizing: 'border-box'
             }}>
               <img 
                 src="/whatsapp.jpg" 
@@ -156,7 +158,9 @@ export const ContactFormUI = () => {
                 color: '#0f172a',
                 fontSize: '15px',
                 fontFamily: '"Inter", sans-serif',
-                boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)'
+                boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)',
+                boxSizing: 'border-box',
+                width: '100%'
               }}
             />
             <input 
@@ -174,7 +178,9 @@ export const ContactFormUI = () => {
                 color: '#0f172a',
                 fontSize: '15px',
                 fontFamily: '"Inter", sans-serif',
-                boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)'
+                boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)',
+                boxSizing: 'border-box',
+                width: '100%'
               }}
             />
           </div>
@@ -193,7 +199,9 @@ export const ContactFormUI = () => {
               fontSize: '15px',
               fontFamily: '"Inter", sans-serif',
               resize: 'none',
-              boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)'
+              boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)',
+              boxSizing: 'border-box',
+              width: '100%'
             }}
           />
           
