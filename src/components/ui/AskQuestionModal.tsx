@@ -121,8 +121,6 @@ export function AskQuestionModal() {
   const [activeEngine, setActiveEngine] = useState<string | null>(null);
 
   // Multi-LLM Keys from Environment Variables
-  const openRouterKey = "sk-or-v1-" + "37c91e7d7cf685198f05cf7ff187f153e8ce7b9f05f5d6ef64d780c814220f78";
-
   const MAX_QUESTIONS = 5;
 
   if (!isAskQuestionModalOpen) return null;
@@ -145,21 +143,27 @@ export function AskQuestionModal() {
     setCurrentSubtitle("Thinking...");
 
     let answer = "";
-    const apiErrors: string[] = [];
-
+    
     try {
-      if (openRouterKey) {
-        try {
-          setActiveEngine("OpenRouter");
-          answer = await askOpenRouter(currentQ, openRouterKey);
-        } catch (e: any) {
-          console.warn("OpenRouter failed", e);
-          apiErrors.push(e.message || "OpenRouter Error");
-        }
+      setActiveEngine("Manohar AI");
+      const response = await fetch("http://localhost:3000/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ question: currentQ })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Backend request failed");
       }
 
+      const data = await response.json();
+      answer = data.answer;
+      
       if (!answer) {
-        throw new Error(`Failed to get answer. Details: ${apiErrors.join(" | ")}`);
+        throw new Error("Failed to get answer from backend.");
       }
       
       // Generate Voice using standard Web Speech API (Browser Built-in)
