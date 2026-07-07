@@ -10,16 +10,15 @@ const ContactCard = () => {
   const setIsContactFormOpen = useAppStore(state => state.setIsContactFormOpen);
   const cardRef = useRef<THREE.Mesh>(null);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!cardRef.current) return;
     
     if (isContactCardVisible) {
       if (cardRef.current.scale.x < 1) {
         cardRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), delta * 5);
       }
-      // Floating animation
-      cardRef.current.position.y = 0.962 + Math.sin(state.clock.elapsedTime * 2) * 0.05;
-      cardRef.current.rotation.y += delta * 0.5; // Slowly rotate to catch attention
+      // Lie flat on the table
+      cardRef.current.position.y = 0.932;
     } else {
       cardRef.current.scale.set(0, 0, 0);
     }
@@ -28,7 +27,7 @@ const ContactCard = () => {
   return (
     <mesh 
       ref={cardRef} 
-      position={[0, 0.962, -0.1]} 
+      position={[0, 0.932, -0.1]} 
       rotation={[0, 0, 0]}
       scale={[0, 0, 0]}
       onClick={(e) => {
@@ -41,7 +40,7 @@ const ContactCard = () => {
       castShadow
       receiveShadow
     >
-      <boxGeometry args={[0.3, 0.02, 0.2]} />
+      <boxGeometry args={[0.1, 0.002, 0.06]} />
       {/* Glowing yellow material */}
       <meshStandardMaterial color="#fef08a" emissive="#eab308" emissiveIntensity={1.5} roughness={0.2} />
     </mesh>
