@@ -247,7 +247,7 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
   const hasSecondaryVoicePlayed = useAppStore(state => state.hasSecondaryVoicePlayed);
   const setHasSecondaryVoicePlayed = useAppStore(state => state.setHasSecondaryVoicePlayed);
   const setIsAskQuestionPromptVisible = useAppStore(state => state.setIsAskQuestionPromptVisible);
-  const currentQuestId = useAppStore(state => state.currentQuestId);
+  const setCurrentQuestId = useAppStore(state => state.setCurrentQuestId);
 
   useEffect(() => {
     // Only play after intro finishes and when user reaches bench (quest becomes talk_to_avatar or something, 
