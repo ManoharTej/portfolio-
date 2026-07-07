@@ -226,8 +226,8 @@ const App = () => {
                 scale={hasTeleported ? 1.5 : 1.15} 
               />
 
-              {/* Ocean walking floor at water surface level */}
-              <RigidBody type="fixed" position={[0, -0.5, 0]}>
+              {/* Ocean walking floor lowered so character walks INSIDE the water */}
+              <RigidBody type="fixed" position={[0, -1.0, 0]}>
                 <mesh>
                   <boxGeometry args={[10000, 1, 10000]} />
                   <meshBasicMaterial transparent opacity={0} depthWrite={false} />

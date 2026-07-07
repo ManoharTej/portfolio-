@@ -8,42 +8,55 @@ import { useAppStore } from '../../store/useAppStore';
 const ContactCard = () => {
   const isContactCardVisible = useAppStore(state => state.isContactCardVisible);
   const setIsContactFormOpen = useAppStore(state => state.setIsContactFormOpen);
-  const cardRef = useRef<THREE.Mesh>(null);
+  const cardRef = useRef<THREE.Group>(null);
+  const arrowRef = useRef<THREE.Mesh>(null);
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     if (!cardRef.current) return;
     
     if (isContactCardVisible) {
-      if (cardRef.current.scale.x < 1) {
-        cardRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), delta * 5);
+      if (cardRef.current.scale.x < 1.5) {
+        cardRef.current.scale.lerp(new THREE.Vector3(1.5, 1.5, 1.5), delta * 5);
       }
       // Lie flat on the table
       cardRef.current.position.y = 0.932;
     } else {
       cardRef.current.scale.set(0, 0, 0);
     }
+    
+    if (arrowRef.current && isContactCardVisible) {
+      arrowRef.current.position.y = 0.15 + Math.sin(state.clock.elapsedTime * 4) * 0.05;
+    }
   });
 
   return (
-    <mesh 
-      ref={cardRef} 
+    <group 
+      ref={cardRef}
       position={[0.5, 0.932, -0.2]} 
-      rotation={[0, 0, 0]}
       scale={[0, 0, 0]}
-      onClick={(e) => {
-        if (!isContactCardVisible) return;
-        e.stopPropagation();
-        setIsContactFormOpen(true);
-      }}
-      onPointerEnter={() => document.body.style.cursor = 'pointer'}
-      onPointerLeave={() => document.body.style.cursor = 'auto'}
-      castShadow
-      receiveShadow
     >
-      <boxGeometry args={[0.1, 0.002, 0.06]} />
-      {/* Glowing yellow material */}
-      <meshStandardMaterial color="#fef08a" emissive="#eab308" emissiveIntensity={1.5} roughness={0.2} />
-    </mesh>
+      {/* The actual card */}
+      <mesh 
+        onClick={(e) => {
+          if (!isContactCardVisible) return;
+          e.stopPropagation();
+          setIsContactFormOpen(true);
+        }}
+        onPointerEnter={() => document.body.style.cursor = 'pointer'}
+        onPointerLeave={() => document.body.style.cursor = 'auto'}
+        castShadow
+        receiveShadow
+      >
+        <boxGeometry args={[0.1, 0.002, 0.06]} />
+        <meshStandardMaterial color="#fef08a" emissive="#eab308" emissiveIntensity={1.5} roughness={0.2} />
+      </mesh>
+      
+      {/* Bouncing Arrow Indicator */}
+      <mesh ref={arrowRef} position={[0, 0.15, 0]} rotation={[Math.PI, 0, 0]}>
+        <coneGeometry args={[0.03, 0.08, 4]} />
+        <meshStandardMaterial color="#38bdf8" emissive="#38bdf8" emissiveIntensity={1} />
+      </mesh>
+    </group>
   );
 };
 

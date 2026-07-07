@@ -113,8 +113,7 @@ export const ContactFormUI = () => {
                 style={{
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover',
-                  transform: isQrRevealed ? 'scale(1.25)' : 'scale(1.25)', // Zoom in to crop black borders
+                  objectFit: 'contain',
                   filter: isQrRevealed ? 'none' : 'blur(5px)',
                   transition: 'filter 0.5s ease',
                   opacity: isQrRevealed ? 1 : 0.4

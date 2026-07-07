@@ -71,6 +71,14 @@ interface AppState {
   isCameraFlyAway: boolean;
   setIsCameraFlyAway: (v: boolean) => void;
 
+  // New states for the Ask Questions flow
+  isAskQuestionPromptVisible: boolean;
+  setIsAskQuestionPromptVisible: (v: boolean) => void;
+  isAskQuestionButtonVisible: boolean;
+  setIsAskQuestionButtonVisible: (v: boolean) => void;
+  hasSecondaryVoicePlayed: boolean;
+  setHasSecondaryVoicePlayed: (v: boolean) => void;
+
   currentQuestId: 'reach_bench' | 'talk_to_avatar' | 'explore_island' | 'go_to_skills' | 'go_to_projects' | 'go_to_media' | 'go_to_contact' | 'click_contact_card' | null;
   setCurrentQuestId: (questId: 'reach_bench' | 'talk_to_avatar' | 'explore_island' | 'go_to_skills' | 'go_to_projects' | 'go_to_media' | 'go_to_contact' | 'click_contact_card' | null) => void;
 
@@ -189,6 +197,14 @@ export const useAppStore = create<AppState>((set) => ({
   setIsEndingSequence: (v) => set({ isEndingSequence: v }),
   isCameraFlyAway: false,
   setIsCameraFlyAway: (v) => set({ isCameraFlyAway: v }),
+
+  // New Ask Questions states
+  isAskQuestionPromptVisible: false,
+  setIsAskQuestionPromptVisible: (v) => set({ isAskQuestionPromptVisible: v }),
+  isAskQuestionButtonVisible: false,
+  setIsAskQuestionButtonVisible: (v) => set({ isAskQuestionButtonVisible: v }),
+  hasSecondaryVoicePlayed: false,
+  setHasSecondaryVoicePlayed: (v) => set({ hasSecondaryVoicePlayed: v }),
 
   currentQuestId: 'reach_bench',
   setCurrentQuestId: (questId) => set({ currentQuestId: questId }),

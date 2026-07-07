@@ -243,6 +243,55 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
     return () => window.removeEventListener('click', onInteract);
   }, [isPlaying, isIntroFinished, setIsSpeaking]);
 
+  // Secondary voice prompt when arriving at the bench
+  const hasSecondaryVoicePlayed = useAppStore(state => state.hasSecondaryVoicePlayed);
+  const setHasSecondaryVoicePlayed = useAppStore(state => state.setHasSecondaryVoicePlayed);
+  const setIsAskQuestionPromptVisible = useAppStore(state => state.setIsAskQuestionPromptVisible);
+  const currentQuestId = useAppStore(state => state.currentQuestId);
+
+  useEffect(() => {
+    // Only play after intro finishes and when user reaches bench (quest becomes talk_to_avatar or something, 
+    // or we just play it immediately after intro audio finishes)
+    if (isIntroFinished && !hasSecondaryVoicePlayed) {
+      setHasSecondaryVoicePlayed(true);
+
+      setTimeout(() => {
+        const text = "You can either ask me more questions, or contact me by clicking the card.";
+        setCurrentSubtitle(text);
+        setIsSpeaking(true);
+        setCurrentQuestId('click_contact_card'); // Update objective
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+
+        // Try to find a male voice
+        const setMaleVoice = () => {
+          const voices = window.speechSynthesis.getVoices();
+          const maleVoice = voices.find(v => v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('guy') || v.name.includes('Google UK English Male') || v.name.includes('David'));
+          if (maleVoice) utterance.voice = maleVoice;
+        };
+        
+        setMaleVoice();
+        window.speechSynthesis.onvoiceschanged = setMaleVoice;
+
+        utterance.onend = () => {
+          setIsSpeaking(false);
+          setCurrentSubtitle("");
+          setIsAskQuestionPromptVisible(true);
+        };
+        
+        utterance.onerror = () => {
+          setIsSpeaking(false);
+          setCurrentSubtitle("");
+          setIsAskQuestionPromptVisible(true);
+        };
+
+        window.speechSynthesis.speak(utterance);
+      }, 1500); // Wait 1.5 seconds after intro finishes
+    }
+  }, [isIntroFinished, hasSecondaryVoicePlayed, setHasSecondaryVoicePlayed, setIsAskQuestionPromptVisible, setCurrentSubtitle, setIsSpeaking]);
+
   // Handle the Ending Sequence TTS
   const isEndingSequence = useAppStore(state => state.isEndingSequence);
   const isCameraFlyAway = useAppStore(state => state.isCameraFlyAway);

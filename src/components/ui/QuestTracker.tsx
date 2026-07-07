@@ -38,7 +38,7 @@ export function QuestTracker() {
   } else if (currentQuestId === 'talk_to_avatar') {
     description = "You've reached the table! Click 'Ask Question' to speak to the AI clone.";
   } else if (currentQuestId === 'click_contact_card') {
-    description = "Click the glowing yellow card on the table to view contact info.";
+    description = "Click on the card";
   } else if (currentQuestId === 'explore_island') {
     description = "Take your time and enjoy the scenery!";
   }
