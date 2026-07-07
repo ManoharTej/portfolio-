@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { useAppStore } from '../../store/useAppStore';
+import { useProgress } from '@react-three/drei';
 
 const finalName = "MANOHAR TEJ";
 
@@ -54,6 +55,7 @@ export const WelcomeScreen = () => {
   const setVisitorName = useAppStore(state => state.setVisitorName);
   const visitorEmail = useAppStore(state => state.visitorEmail);
   const setVisitorEmail = useAppStore(state => state.setVisitorEmail);
+  const { progress } = useProgress();
 
 
   const hasAnimated = useRef(false);
@@ -69,7 +71,7 @@ export const WelcomeScreen = () => {
   }, []);
 
   useEffect(() => {
-    if (introStage === 'welcome' && !hasAnimated.current) {
+    if (progress === 100 && introStage === 'welcome' && !hasAnimated.current) {
       hasAnimated.current = true;
       
       if (svgRef.current) {
@@ -161,6 +163,9 @@ export const WelcomeScreen = () => {
   };
 
   if (introStage === 'complete') return null;
+  
+  // Wait for 3D assets to load before showing the cinematic screen
+  if (progress < 100) return null;
 
   const renderSplitText = (text: string, className: string) => {
     return text.split("").map((char, i) => (
