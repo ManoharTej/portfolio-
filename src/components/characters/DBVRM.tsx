@@ -200,7 +200,10 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
         audioCtxRef.current.resume();
       }
 
-      audioRef.current.play().catch(e => console.error("AI audio play failed", e));
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+        setIsSpeaking(true);
+      }).catch(e => console.error("AI audio play failed", e));
     }
   }, [aiAudioUrl, setAiAudioUrl, setIsPlaying, setIsSpeaking, setIsIntroFinished, setCurrentSubtitle]);
 
@@ -381,8 +384,13 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
       const average = sum / dataArray.current.length;
 
       targetMouth = average > 5 ? average / 50.0 : 0;
+      
+      // Fallback for AI TTS if CORS blocks Web Audio API analysis
+      if (targetMouth === 0 && aiAudioUrl && !audioRef.current.paused) {
+         targetMouth = Math.random() > 0.3 ? 0.2 + Math.random() * 0.6 : 0.05;
+      }
     } else if (isSpeaking && !isPlaying) {
-      // Spoof lip-sync for AI TTS since window.speechSynthesis doesn't pipe to AudioContext
+      // Spoof lip-sync for generic TTS
       targetMouth = Math.random() > 0.3 ? 0.2 + Math.random() * 0.6 : 0.05;
     }
 
