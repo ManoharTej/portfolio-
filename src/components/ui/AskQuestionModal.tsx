@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { KNOWLEDGE_BASE } from '../../data/achievements';
 
-const buildPrompt = (question: string) => 
-  `${KNOWLEDGE_BASE}\n\nVisitor's Question: "${question}"\n\nAnswer concisely in 2-3 sentences, speaking exactly as Manohar Tej.`;
+
+
 
 export function AskQuestionModal() {
   const isAskQuestionModalOpen = useAppStore(state => state.isAskQuestionModalOpen);
@@ -47,7 +47,10 @@ export function AskQuestionModal() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ question: currentQ })
+        body: JSON.stringify({ 
+          question: currentQ,
+          context: KNOWLEDGE_BASE
+        })
       });
 
       if (!response.ok) {

@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/api/chat', async (req, res) => {
-  const { question } = req.body;
+  const { question, context } = req.body;
   
   if (!question) {
     return res.status(400).json({ error: 'Question is required' });
@@ -37,7 +37,7 @@ app.post('/api/chat', async (req, res) => {
         messages: [
           {
             role: "system",
-            content: `You are Manohar Tej's AI assistant. Keep responses under 30 words, friendly, and concise.`
+            content: `You are Manohar Tej's AI assistant. Keep responses under 30 words, friendly, and concise. Here is the context about Manohar: \n\n${context}`
           },
           { role: "user", content: question }
         ],

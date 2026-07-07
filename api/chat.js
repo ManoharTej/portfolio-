@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { question } = req.body;
+  const { question, context } = req.body;
   
   if (!question) {
     return res.status(400).json({ error: 'Question is required' });
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         messages: [
           {
             role: "system",
-            content: `You are Manohar Tej's AI assistant. Keep responses under 30 words, friendly, and concise.`
+            content: `You are Manohar Tej's AI assistant. Keep responses under 30 words, friendly, and concise. Here is the context about Manohar: \n\n${context}`
           },
           { role: "user", content: question }
         ],
