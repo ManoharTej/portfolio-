@@ -130,7 +130,7 @@ export const WelcomeScreen = () => {
         textStart + 3.0
       );
     }
-  }, [introStage]);
+  }, [introStage, progress]);
 
   const handleStart = () => {
     // FIX: Only fade out the welcome text, NOT the entire wrapper container!
