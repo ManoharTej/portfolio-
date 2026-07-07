@@ -251,46 +251,38 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
       setCurrentSubtitle(message);
       
       try {
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel(); // Clear any ongoing speech
-          const utterance = new SpeechSynthesisUtterance(message);
-          utterance.rate = 1.0;
-          utterance.pitch = 1.0;
-          
-          const voices = window.speechSynthesis.getVoices();
-          const preferredVoice = voices.find(v => v.name.includes('Google US English') || v.name.includes('Microsoft Mark') || v.lang === 'en-US');
-          if (preferredVoice) utterance.voice = preferredVoice;
-          
-          utterance.onstart = () => {
-            setIsSpeaking(true);
-            targetGesture.current = 1; // Explaining/welcoming gesture
-          };
-          
-          utterance.onend = () => {
-            setIsSpeaking(false);
-            setTimeout(() => setCurrentSubtitle(""), 1000);
-            setIsEndingSequence(false);
-            setIsCameraFlyAway(true); // Trigger camera fly away
-          };
-          
-          utterance.onerror = () => {
-            setIsSpeaking(false);
-            setTimeout(() => setCurrentSubtitle(""), 1000);
-            setIsEndingSequence(false);
-            setIsCameraFlyAway(true); 
-          };
-
-          window.speechSynthesis.speak(utterance);
-        } else {
-          // Fallback if TTS not supported
+        const audio = new Audio('/end.wav');
+        
+        audio.onplay = () => {
+          setIsSpeaking(true);
+          targetGesture.current = 1; // Explaining/welcoming gesture
+        };
+        
+        audio.onended = () => {
+          setIsSpeaking(false);
+          setTimeout(() => setCurrentSubtitle(""), 1000);
+          setIsEndingSequence(false);
+          setIsCameraFlyAway(true); // Trigger camera fly away
+        };
+        
+        audio.onerror = () => {
+          console.error("Ending audio failed to load");
+          setIsSpeaking(false);
+          setTimeout(() => setCurrentSubtitle(""), 1000);
+          setIsEndingSequence(false);
+          setIsCameraFlyAway(true);
+        };
+        
+        audio.play().catch(err => {
+          console.error("Audio play blocked", err);
           setTimeout(() => {
             setCurrentSubtitle("");
             setIsEndingSequence(false);
             setIsCameraFlyAway(true);
           }, 4000);
-        }
+        });
       } catch (err) {
-        console.error("Ending TTS failed", err);
+        console.error("Ending audio exception", err);
         setIsCameraFlyAway(true);
       }
     }
@@ -605,7 +597,7 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
         visible={!focusedShelfTier}
       >
         {vrm && <primitive object={vrm.scene} />}
-        {vrm && isIntroFinished && !isEndingSequence && (
+        {vrm && isIntroFinished && !isEndingSequence && !isCameraFlyAway && (
           <Html center position={[0, 1.75, 0]}>
             <div style={{
               backgroundColor: 'rgba(239, 68, 68, 0.9)', // Red box
