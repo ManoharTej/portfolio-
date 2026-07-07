@@ -14,15 +14,7 @@ export const ContactFormUI = () => {
   if (!isContactFormOpen) return null;
 
   const handleRevealQr = () => {
-    if (visitorEmail && visitorEmail.trim() !== '') {
-      setIsQrRevealed(true);
-    } else {
-      const email = window.prompt("Please enter your email to view the WhatsApp QR code:");
-      if (email && email.trim() !== '') {
-        setVisitorEmail(email);
-        setIsQrRevealed(true);
-      }
-    }
+    setIsQrRevealed(true);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
