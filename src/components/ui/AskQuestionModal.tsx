@@ -213,9 +213,6 @@ export function AskQuestionModal() {
       incrementQuestionsAsked();
       setQuestion("");
       
-      // Show subtitle
-      setCurrentSubtitle(answer);
-      
       // Generate Voice using standard Web Speech API (Browser Built-in)
       try {
         if ('speechSynthesis' in window) {
@@ -227,7 +224,10 @@ export function AskQuestionModal() {
           const preferredVoice = voices.find(v => v.name.includes('Google US English') || v.name.includes('Microsoft Mark') || v.lang === 'en-US');
           if (preferredVoice) utterance.voice = preferredVoice;
           
-          utterance.onstart = () => useAppStore.getState().setIsSpeaking(true);
+          utterance.onstart = () => {
+            setCurrentSubtitle(answer); // Sync subtitle with audio start
+            useAppStore.getState().setIsSpeaking(true);
+          };
           utterance.onend = () => {
             useAppStore.getState().setIsSpeaking(false);
             setTimeout(() => useAppStore.getState().setCurrentSubtitle(""), 1000);
@@ -238,9 +238,14 @@ export function AskQuestionModal() {
           };
 
           window.speechSynthesis.speak(utterance);
+        } else {
+          // Fallback if TTS not supported
+          setCurrentSubtitle(answer);
+          setTimeout(() => setCurrentSubtitle(""), 8000);
         }
       } catch (ttsError) {
         console.error("Failed to generate TTS:", ttsError);
+        setCurrentSubtitle(answer);
         setTimeout(() => setCurrentSubtitle(""), 8000);
       }
 
