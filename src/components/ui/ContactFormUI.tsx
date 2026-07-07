@@ -5,8 +5,6 @@ export const ContactFormUI = () => {
   const isContactFormOpen = useAppStore(state => state.isContactFormOpen);
   const setIsContactFormOpen = useAppStore(state => state.setIsContactFormOpen);
   const setIsEndingSequence = useAppStore(state => state.setIsEndingSequence);
-  const visitorEmail = useAppStore(state => state.visitorEmail);
-  const setVisitorEmail = useAppStore(state => state.setVisitorEmail);
 
   const [formData, setFormData] = useState({ name: '', email: '', feedback: '' });
   const [isQrRevealed, setIsQrRevealed] = useState(false);

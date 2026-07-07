@@ -247,7 +247,7 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
   const setIsEndingSequence = useAppStore(state => state.setIsEndingSequence);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
     if (isEndingSequence) {
       timeoutId = setTimeout(() => {
         const message = "Thank you for exploring my world and taking the time to know about me. I hope you enjoyed the experience, and please feel free to send me your feedback if possible!";
