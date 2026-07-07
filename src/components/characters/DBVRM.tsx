@@ -242,6 +242,7 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
 
   // Handle the Ending Sequence TTS
   const isEndingSequence = useAppStore(state => state.isEndingSequence);
+  const isCameraFlyAway = useAppStore(state => state.isCameraFlyAway);
   const setIsCameraFlyAway = useAppStore(state => state.setIsCameraFlyAway);
   const setIsEndingSequence = useAppStore(state => state.setIsEndingSequence);
 
