@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { useAppStore } from '../../store/useAppStore';
-import { useProgress } from '@react-three/drei';
 
 const finalName = "MANOHAR TEJ";
 
@@ -55,7 +54,6 @@ export const WelcomeScreen = () => {
   const setVisitorName = useAppStore(state => state.setVisitorName);
   const visitorEmail = useAppStore(state => state.visitorEmail);
   const setVisitorEmail = useAppStore(state => state.setVisitorEmail);
-  const { progress } = useProgress();
 
 
   const hasAnimated = useRef(false);
@@ -130,7 +128,7 @@ export const WelcomeScreen = () => {
         textStart + 3.0
       );
     }
-  }, [introStage, progress]);
+  }, [introStage]);
 
   const handleStart = () => {
     // FIX: Only fade out the welcome text, NOT the entire wrapper container!
@@ -163,9 +161,6 @@ export const WelcomeScreen = () => {
   };
 
   if (introStage === 'complete') return null;
-  
-  // Wait for 3D assets to load before showing the cinematic screen
-  if (progress < 100) return null;
 
   const renderSplitText = (text: string, className: string) => {
     return text.split("").map((char, i) => (
