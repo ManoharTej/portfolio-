@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import { Suspense, useMemo, useEffect } from 'react';
+import { Suspense, useMemo, useEffect, useState } from 'react';
 import { Ocean } from './components/world/Ocean';
 import { Sky } from './components/world/Sky';
 import { KeyboardControls } from '@react-three/drei';
@@ -25,6 +25,7 @@ import { skillsData, toolsData, certsData } from './data/skillsData';
 import { MediaGem } from './components/world/MediaGem';
 import { ContactFormUI } from './components/ui/ContactFormUI';
 import { EndScreenUI } from './components/ui/EndScreenUI';
+import { MobileWarning } from './components/ui/MobileWarning';
 
 import { Controls } from './controls';
 
@@ -162,6 +163,24 @@ const App = () => {
       }, 50); // Instantly switch to trigger camera flight and beam
     }
   }, [isTeleporting, setHasTeleported, setSittingAtTable]);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileWidth = window.innerWidth <= 768;
+      const isMobileAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      setIsMobile(isMobileWidth || isMobileAgent);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  if (isMobile) {
+    return <MobileWarning />;
+  }
 
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
