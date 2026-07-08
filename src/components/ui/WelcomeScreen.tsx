@@ -69,7 +69,7 @@ export const WelcomeScreen = () => {
   }, []);
 
   useEffect(() => {
-    if (progress === 100 && introStage === 'welcome' && !hasAnimated.current) {
+    if (introStage === 'welcome' && !hasAnimated.current) {
       hasAnimated.current = true;
       
       if (svgRef.current) {
