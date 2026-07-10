@@ -37,29 +37,42 @@ export function GameHUD() {
             {!isSpeaking && <MiniMap />}
             <AudioControls />
             
-            {/* Persistent Ask Questions Button */}
-            {isSittingAtTable && !isContactFormOpen && (
+            {/* Persistent Ask Questions Button (Only shows when returning to the bench) */}
+            {isSittingAtTable && hasTeleported && !isContactFormOpen && (
               <button
                 onClick={() => setIsAskQuestionModalOpen(true)}
                 style={{
                   position: 'absolute',
                   top: '50%',
-                  right: '20px',
+                  right: '30px',
                   transform: 'translateY(-50%)',
-                  background: 'rgba(56, 189, 248, 0.2)',
-                  border: '1px solid #38bdf8',
+                  background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(56, 189, 248, 0.1))',
+                  border: '1px solid rgba(56, 189, 248, 0.5)',
+                  borderLeft: '4px solid #38bdf8',
                   color: 'white',
-                  padding: '12px 24px',
-                  borderRadius: '8px',
+                  padding: '16px 32px',
+                  borderRadius: '12px',
                   cursor: 'pointer',
-                  fontWeight: 'bold',
-                  boxShadow: '0 0 15px rgba(56,189,248,0.3)',
-                  backdropFilter: 'blur(4px)',
+                  fontWeight: '800',
+                  fontSize: '1.1rem',
+                  letterSpacing: '1px',
+                  boxShadow: '0 8px 32px rgba(14, 165, 233, 0.3), inset 0 0 20px rgba(56, 189, 248, 0.1)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
                   pointerEvents: 'auto',
-                  transition: 'all 0.2s'
+                  transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                  textTransform: 'uppercase'
                 }}
-                onMouseEnter={e => e.currentTarget.style.background = 'rgba(56, 189, 248, 0.4)'}
-                onMouseLeave={e => e.currentTarget.style.background = 'rgba(56, 189, 248, 0.2)'}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(14, 165, 233, 0.4), rgba(56, 189, 248, 0.2))';
+                  e.currentTarget.style.transform = 'translateY(-50%) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(14, 165, 233, 0.5), inset 0 0 30px rgba(56, 189, 248, 0.2)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(56, 189, 248, 0.1))';
+                  e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(14, 165, 233, 0.3), inset 0 0 20px rgba(56, 189, 248, 0.1)';
+                }}
               >
                 ASK A QUESTION
               </button>

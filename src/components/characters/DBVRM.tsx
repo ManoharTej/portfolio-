@@ -243,16 +243,16 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
     return () => window.removeEventListener('click', onInteract);
   }, [isPlaying, isIntroFinished, setIsSpeaking]);
 
-  // Secondary voice prompt when arriving at the bench
+  // Secondary voice prompt when arriving at the bench AFTER exploring
   const hasSecondaryVoicePlayed = useAppStore(state => state.hasSecondaryVoicePlayed);
   const setHasSecondaryVoicePlayed = useAppStore(state => state.setHasSecondaryVoicePlayed);
-  const setIsAskQuestionPromptVisible = useAppStore(state => state.setIsAskQuestionPromptVisible);
   const setCurrentQuestId = useAppStore(state => state.setCurrentQuestId);
+  const hasTeleported = useAppStore(state => state.hasTeleported);
+  const isSittingAtTable = useAppStore(state => state.isSittingAtTable);
 
   useEffect(() => {
-    // Only play after intro finishes and when user reaches bench (quest becomes talk_to_avatar or something, 
-    // or we just play it immediately after intro audio finishes)
-    if (isIntroFinished && !hasSecondaryVoicePlayed) {
+    // Only play after user explores the island and returns to the bench
+    if (hasTeleported && isSittingAtTable && !hasSecondaryVoicePlayed) {
       setHasSecondaryVoicePlayed(true);
 
       setTimeout(() => {
@@ -278,7 +278,6 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
         utterance.onend = () => {
           setIsSpeaking(false);
           setCurrentSubtitle("");
-          setIsAskQuestionPromptVisible(true);
         };
         
         utterance.onerror = () => {
