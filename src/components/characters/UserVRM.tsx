@@ -412,7 +412,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
         }
 
         if ((jump || autoJump) && Math.abs(linvel.y) < 0.1) {
-          newVelY = 8.0; 
+          newVelY = 4.0; 
           store.setCurrentHint(null); // Clear hint on jump
         }
 
