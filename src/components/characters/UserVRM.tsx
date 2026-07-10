@@ -25,6 +25,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
   const visitorName = useAppStore((state) => state.visitorName);
   const isIntroFinished = useAppStore((state) => state.isIntroFinished);
   const isEndingSequence = useAppStore((state) => state.isEndingSequence);
+  const isCameraFlyAway = useAppStore((state) => state.isCameraFlyAway);
   const isSittingAtTable = useAppStore((state) => state.isSittingAtTable);
   const isAskQuestionModalOpen = useAppStore((state) => state.isAskQuestionModalOpen);
   const isWriting = useAppStore((state) => state.isWriting);
@@ -479,7 +480,7 @@ export function UserVRM({ url, position = [0, 0, 0], rotation, scale = 1, isPlay
         <CapsuleCollider args={[0.6, 0.3]} position={[0, 0.9, 0]} />
         <group ref={characterGroup} position={[0, sitting ? -0.45 : (hasTeleported ? 0.65 : -0.1), 0]}>
           {vrm && <primitive object={vrm.scene} />}
-          {vrm && isIntroFinished && !isEndingSequence && (
+          {vrm && isIntroFinished && !isEndingSequence && !isCameraFlyAway && (
             <Html center position={[0, 1.75, 0]}>
               <div style={{
                 backgroundColor: 'rgba(56, 189, 248, 0.9)', // Blue box for user
