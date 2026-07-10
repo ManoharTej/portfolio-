@@ -10,6 +10,7 @@ export function GameHUD() {
   const isCameraDropComplete = useAppStore(state => state.isCameraDropComplete);
   const isSpeaking = useAppStore(state => state.isSpeaking);
   const isSittingAtTable = useAppStore(state => state.isSittingAtTable);
+  const hasTeleported = useAppStore(state => state.hasTeleported);
 
   const setIsAskQuestionModalOpen = useAppStore(state => state.setIsAskQuestionModalOpen);
   const isContactFormOpen = useAppStore(state => state.isContactFormOpen);

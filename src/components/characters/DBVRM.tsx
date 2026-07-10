@@ -247,8 +247,6 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
   const hasSecondaryVoicePlayed = useAppStore(state => state.hasSecondaryVoicePlayed);
   const setHasSecondaryVoicePlayed = useAppStore(state => state.setHasSecondaryVoicePlayed);
   const setCurrentQuestId = useAppStore(state => state.setCurrentQuestId);
-  const hasTeleported = useAppStore(state => state.hasTeleported);
-  const isSittingAtTable = useAppStore(state => state.isSittingAtTable);
 
   useEffect(() => {
     // Only play after user explores the island and returns to the bench
@@ -283,13 +281,12 @@ export function DBVRM({ position = [0, 0, 0], rotation, scale = 1 }: DBVRMProps)
         utterance.onerror = () => {
           setIsSpeaking(false);
           setCurrentSubtitle("");
-          setIsAskQuestionPromptVisible(true);
         };
 
         window.speechSynthesis.speak(utterance);
       }, 1500); // Wait 1.5 seconds after intro finishes
     }
-  }, [isIntroFinished, hasSecondaryVoicePlayed, setHasSecondaryVoicePlayed, setIsAskQuestionPromptVisible, setCurrentSubtitle, setIsSpeaking]);
+  }, [hasTeleported, isSittingAtTable, hasSecondaryVoicePlayed, setHasSecondaryVoicePlayed, setCurrentSubtitle, setIsSpeaking]);
 
   // Handle the Ending Sequence TTS
   const isEndingSequence = useAppStore(state => state.isEndingSequence);
