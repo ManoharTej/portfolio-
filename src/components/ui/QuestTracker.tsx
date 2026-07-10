@@ -19,7 +19,7 @@ export function QuestTracker() {
   let description = "";
   if (currentQuestId === 'go_to_skills') {
     if (viewedSkills.length < skillsData.length) {
-      description = `Head to the wooden Skills Shelf and interact with the floating titles to view skills (${viewedSkills.length}/${skillsData.length}).`;
+      description = `Reach the wooden Skills Shelf and click on "Core Skills" to view your skills (${viewedSkills.length}/${skillsData.length}).`;
     } else if (viewedTools.length < toolsData.length) {
       description = `Great! Now click 'Tools & Tech' and view all items (${viewedTools.length}/${toolsData.length}).`;
     } else if (viewedCerts.length < certsData.length) {
