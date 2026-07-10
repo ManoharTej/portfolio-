@@ -25,7 +25,7 @@ const ContactCard = () => {
     }
     
     if (arrowRef.current && isContactCardVisible) {
-      arrowRef.current.position.y = 0.15 + Math.sin(state.clock.elapsedTime * 4) * 0.05;
+      arrowRef.current.position.y = 0.08 + Math.sin(state.clock.elapsedTime * 4) * 0.03;
     }
   });
 
@@ -52,7 +52,7 @@ const ContactCard = () => {
       </mesh>
       
       {/* Bouncing Arrow Indicator (Dark Blue Arrow Shape) */}
-      <group ref={arrowRef as any} position={[0, 0.15, 0]}>
+      <group ref={arrowRef as any} position={[0, 0.08, 0]}>
         {/* Shaft */}
         <mesh position={[0, 0.03, 0]}>
           <cylinderGeometry args={[0.005, 0.005, 0.04, 8]} />
