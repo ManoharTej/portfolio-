@@ -118,10 +118,9 @@ export function MiniMap() {
                     C ${islandMap.x - 50} ${islandMap.y - 40}, ${islandMap.x - 10} ${islandMap.y - 60}, ${islandMap.x + 20} ${islandMap.y - 45} 
                     C ${islandMap.x + 50} ${islandMap.y - 30}, ${islandMap.x + 60} ${islandMap.y + 15}, ${islandMap.x + 30} ${islandMap.y + 40} 
                     C ${islandMap.x + 5} ${islandMap.y + 60}, ${islandMap.x - 30} ${islandMap.y + 45}, ${islandMap.x - 40} ${islandMap.y - 15} Z`} 
-                fill="rgba(14, 165, 233, 0.05)" 
-                stroke="#38bdf8"
+                fill="url(#islandTerrain)" 
+                stroke="#166534"
                 strokeWidth="1.5"
-                strokeDasharray="4,3"
               />
 
               {/* Projects Island (Right side) */}
@@ -129,10 +128,9 @@ export function MiniMap() {
                 d={`M ${islandMap.x + 70} ${islandMap.y - 25} 
                     C ${islandMap.x + 60} ${islandMap.y - 40}, ${islandMap.x + 90} ${islandMap.y - 50}, ${islandMap.x + 105} ${islandMap.y - 20} 
                     C ${islandMap.x + 115} ${islandMap.y + 10}, ${islandMap.x + 90} ${islandMap.y + 30}, ${islandMap.x + 75} ${islandMap.y + 10} Z`}
-                fill="rgba(244, 63, 94, 0.05)"
-                stroke="#fb7185"
+                fill="url(#islandTerrain)"
+                stroke="#166534"
                 strokeWidth="1.5"
-                strokeDasharray="4,3"
               />
 
               {/* Media Island (Top Right side) */}
@@ -140,30 +138,29 @@ export function MiniMap() {
                 d={`M ${islandMap.x + 20} ${islandMap.y - 75} 
                     C ${islandMap.x + 10} ${islandMap.y - 95}, ${islandMap.x + 40} ${islandMap.y - 110}, ${islandMap.x + 60} ${islandMap.y - 85} 
                     C ${islandMap.x + 75} ${islandMap.y - 60}, ${islandMap.x + 45} ${islandMap.y - 45}, ${islandMap.x + 30} ${islandMap.y - 60} Z`}
-                fill="rgba(168, 85, 247, 0.05)"
-                stroke="#c084fc"
+                fill="url(#islandTerrain)"
+                stroke="#166534"
                 strokeWidth="1.5"
-                strokeDasharray="4,3"
               />
 
-              {/* Bridges */}
+              {/* Bridges (Solid wood) */}
               {/* Main to Projects */}
-              <path d={`M ${islandMap.x + 40} ${islandMap.y + 5} L ${islandMap.x + 75} ${islandMap.y - 5}`} stroke="#94a3b8" strokeWidth="4" strokeDasharray="2,2" opacity="0.6"/>
+              <path d={`M ${islandMap.x + 40} ${islandMap.y + 5} L ${islandMap.x + 75} ${islandMap.y - 5}`} stroke="#854d0e" strokeWidth="6" strokeLinecap="round" />
               {/* Main to Media */}
-              <path d={`M ${islandMap.x + 20} ${islandMap.y - 40} L ${islandMap.x + 35} ${islandMap.y - 70}`} stroke="#94a3b8" strokeWidth="4" strokeDasharray="2,2" opacity="0.6"/>
+              <path d={`M ${islandMap.x + 20} ${islandMap.y - 40} L ${islandMap.x + 35} ${islandMap.y - 70}`} stroke="#854d0e" strokeWidth="6" strokeLinecap="round" />
 
               {/* Board on Projects Island */}
-              <rect x={islandMap.x + 80} y={islandMap.y - 20} width="16" height="8" fill="transparent" stroke="#fb7185" strokeWidth="1.5" transform={`rotate(-15 ${islandMap.x + 88} ${islandMap.y - 16})`} />
+              <rect x={islandMap.x + 80} y={islandMap.y - 20} width="16" height="8" fill="#1e293b" stroke="#78350f" strokeWidth="2" rx="1" transform={`rotate(-15 ${islandMap.x + 88} ${islandMap.y - 16})`} />
               
               {/* Gem on Media Island */}
-              <polygon points={`${islandMap.x + 45},${islandMap.y - 85} ${islandMap.x + 50},${islandMap.y - 80} ${islandMap.x + 45},${islandMap.y - 75} ${islandMap.x + 40},${islandMap.y - 80}`} fill="transparent" stroke="#c084fc" strokeWidth="1.5" />
+              <polygon points={`${islandMap.x + 45},${islandMap.y - 85} ${islandMap.x + 50},${islandMap.y - 80} ${islandMap.x + 45},${islandMap.y - 75} ${islandMap.x + 40},${islandMap.y - 80}`} fill="#c084fc" stroke="#a855f7" strokeWidth="1" />
 
               {/* Skills Shelf on Main Island */}
-              <rect x={islandMap.x - 10} y={islandMap.y - 25} width="20" height="8" fill="transparent" stroke="#38bdf8" strokeWidth="1.5" />
-              <rect x={islandMap.x - 9} y={islandMap.y - 24} width="18" height="6" fill="rgba(56, 189, 248, 0.2)" />
+              <rect x={islandMap.x - 10} y={islandMap.y - 25} width="20" height="8" fill="#475569" stroke="#334155" strokeWidth="1.5" rx="1" />
+              <rect x={islandMap.x - 9} y={islandMap.y - 24} width="18" height="6" fill="#94a3b8" />
               
               {/* Teleport Pad */}
-              <circle cx={islandMap.x + 5} cy={islandMap.y + 15} r="6" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" strokeWidth="1.5" strokeDasharray="2,2" />
+              <circle cx={islandMap.x + 5} cy={islandMap.y + 15} r="6" fill="#06b6d4" stroke="#cffafe" strokeWidth="1" />
               
               <text x={islandMap.x - 20} y={islandMap.y - 45} fill="#ffffff" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" filter="drop-shadow(1px 1px 1px rgba(0,0,0,0.8))">ISLANDS</text>
             </>

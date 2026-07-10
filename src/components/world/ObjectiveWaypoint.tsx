@@ -59,22 +59,23 @@ export function ObjectiveWaypoint() {
           {/* Distance Label */}
           <Html position={[0, 0.6, 0]} center style={{ pointerEvents: 'none' }}>
             <div style={{
-              backgroundColor: 'rgba(2, 6, 23, 0.9)',
-              backdropFilter: 'blur(2px)',
-              padding: '2px 6px',
-              borderRadius: '12px',
-              border: '1px solid #1e293b',
-              color: '#94a3b8',
+              backgroundColor: 'rgba(15, 23, 42, 0.8)',
+              backdropFilter: 'blur(4px)',
+              padding: '4px 10px',
+              borderRadius: '20px',
+              border: '1px solid #38bdf8',
+              color: '#38bdf8',
               fontFamily: '"Outfit", sans-serif',
               fontWeight: 700,
-              fontSize: '10px',
+              fontSize: '12px',
               whiteSpace: 'nowrap',
+              textShadow: '0 2px 4px rgba(0,0,0,0.5)',
               display: 'flex',
               alignItems: 'center',
-              gap: '3px',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.8)'
+              gap: '4px',
+              boxShadow: '0 0 10px rgba(56, 189, 248, 0.4)'
             }}>
-              <span>⬇</span>
+              <span>▼</span>
               <span>{distance}m</span>
             </div>
           </Html>

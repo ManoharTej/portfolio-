@@ -53,8 +53,8 @@ const ContactCard = () => {
       
       {/* Bouncing Arrow Indicator */}
       <mesh ref={arrowRef} position={[0, 0.15, 0]} rotation={[Math.PI, 0, 0]}>
-        <coneGeometry args={[0.03, 0.08, 4]} />
-        <meshStandardMaterial color="#38bdf8" emissive="#38bdf8" emissiveIntensity={1} />
+        <coneGeometry args={[0.015, 0.04, 4]} />
+        <meshStandardMaterial color="#0f172a" emissive="#1e293b" emissiveIntensity={0.5} roughness={0.8} />
       </mesh>
     </group>
   );
