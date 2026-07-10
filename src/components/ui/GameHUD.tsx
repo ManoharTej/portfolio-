@@ -9,11 +9,8 @@ export function GameHUD() {
   const introStage = useAppStore(state => state.introStage);
   const isCameraDropComplete = useAppStore(state => state.isCameraDropComplete);
   const isSpeaking = useAppStore(state => state.isSpeaking);
+  const isSittingAtTable = useAppStore(state => state.isSittingAtTable);
 
-  const isAskQuestionPromptVisible = useAppStore(state => state.isAskQuestionPromptVisible);
-  const setIsAskQuestionPromptVisible = useAppStore(state => state.setIsAskQuestionPromptVisible);
-  const isAskQuestionButtonVisible = useAppStore(state => state.isAskQuestionButtonVisible);
-  const setIsAskQuestionButtonVisible = useAppStore(state => state.setIsAskQuestionButtonVisible);
   const setIsAskQuestionModalOpen = useAppStore(state => state.setIsAskQuestionModalOpen);
   const isContactFormOpen = useAppStore(state => state.isContactFormOpen);
 
