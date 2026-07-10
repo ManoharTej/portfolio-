@@ -40,55 +40,8 @@ export function GameHUD() {
             {!isSpeaking && <MiniMap />}
             <AudioControls />
             
-            {/* Ask Questions Prompt */}
-            {isAskQuestionPromptVisible && (
-              <div style={{
-                position: 'absolute',
-                top: '50%',
-                right: '20px',
-                transform: 'translateY(-50%)',
-                background: 'rgba(15, 23, 42, 0.9)',
-                padding: '20px',
-                borderRadius: '12px',
-                border: '1px solid #38bdf8',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 15px rgba(56,189,248,0.3)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '15px',
-                alignItems: 'center',
-                pointerEvents: 'auto'
-              }}>
-                <p style={{ margin: 0, color: 'white', fontWeight: 'bold', fontSize: '18px' }}>Ask Questions?</p>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <button 
-                    onClick={() => {
-                      setIsAskQuestionPromptVisible(false);
-                      setIsAskQuestionButtonVisible(true);
-                      setIsAskQuestionModalOpen(true);
-                    }}
-                    style={{
-                      background: '#16a34a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold'
-                    }}
-                  >
-                    Yes
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setIsAskQuestionPromptVisible(false);
-                      setIsAskQuestionButtonVisible(false);
-                    }}
-                    style={{
-                      background: '#dc2626', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold'
-                    }}
-                  >
-                    No
-                  </button>
-                </div>
-              </div>
-            )}
-            
             {/* Persistent Ask Questions Button */}
-            {isAskQuestionButtonVisible && !isContactFormOpen && (
+            {isSittingAtTable && !isContactFormOpen && (
               <button
                 onClick={() => setIsAskQuestionModalOpen(true)}
                 style={{
