@@ -9,7 +9,7 @@ const ContactCard = () => {
   const isContactCardVisible = useAppStore(state => state.isContactCardVisible);
   const setIsContactFormOpen = useAppStore(state => state.setIsContactFormOpen);
   const cardRef = useRef<THREE.Group>(null);
-  const arrowRef = useRef<THREE.Mesh>(null);
+  const arrowRef = useRef<THREE.Group>(null);
 
   useFrame((state, delta) => {
     if (!cardRef.current) return;
@@ -51,11 +51,19 @@ const ContactCard = () => {
         <meshStandardMaterial color="#fef08a" emissive="#eab308" emissiveIntensity={1.5} roughness={0.2} />
       </mesh>
       
-      {/* Bouncing Arrow Indicator */}
-      <mesh ref={arrowRef} position={[0, 0.15, 0]} rotation={[Math.PI, 0, 0]}>
-        <coneGeometry args={[0.015, 0.04, 4]} />
-        <meshStandardMaterial color="#0f172a" emissive="#1e293b" emissiveIntensity={0.5} roughness={0.8} />
-      </mesh>
+      {/* Bouncing Arrow Indicator (Dark Blue Arrow Shape) */}
+      <group ref={arrowRef as any} position={[0, 0.15, 0]}>
+        {/* Shaft */}
+        <mesh position={[0, 0.03, 0]}>
+          <cylinderGeometry args={[0.005, 0.005, 0.04, 8]} />
+          <meshStandardMaterial color="#172554" emissive="#1e3a8a" emissiveIntensity={0.8} />
+        </mesh>
+        {/* Head */}
+        <mesh position={[0, 0, 0]} rotation={[Math.PI, 0, 0]}>
+          <coneGeometry args={[0.015, 0.03, 16]} />
+          <meshStandardMaterial color="#172554" emissive="#1e3a8a" emissiveIntensity={0.8} />
+        </mesh>
+      </group>
     </group>
   );
 };
