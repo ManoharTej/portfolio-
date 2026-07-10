@@ -87,30 +87,49 @@ export function MiniMap() {
         <g>
           {!hasTeleported && (
             <>
-              {/* The Bench / Table area - Top down satellite view */}
-              <rect x={benchMap.x - 12} y={benchMap.y - 6} width="24" height="12" fill="#854d0e" rx="2" /> {/* Wooden Desk */}
-              <circle cx={benchMap.x - 4} cy={benchMap.y + 10} r="4" fill="#1e293b" /> {/* Avatar chair/head */}
+              {/* The Bench / Table area - SVG Park Bench */}
+              <g transform={`translate(${benchMap.x}, ${benchMap.y}) scale(0.6)`}>
+                {/* Backrest wooden slats */}
+                <rect x="-20" y="-15" width="40" height="4" fill="#a44c4c" rx="1" />
+                <rect x="-20" y="-9" width="40" height="4" fill="#a44c4c" rx="1" />
+                <rect x="-20" y="-3" width="40" height="4" fill="#a44c4c" rx="1" />
+                
+                {/* Seat wooden slats */}
+                <rect x="-22" y="5" width="44" height="4" fill="#8f3d3d" rx="1" />
+                <rect x="-22" y="11" width="44" height="4" fill="#8f3d3d" rx="1" />
+                
+                {/* Iron frame/legs */}
+                <path d="M -15 -15 Q -20 0 -22 15 L -18 15 Q -16 0 -13 -15 Z" fill="#111a24" />
+                <path d="M 15 -15 Q 20 0 22 15 L 18 15 Q 16 0 13 -15 Z" fill="#111a24" />
+                
+                {/* Iron armrests */}
+                <path d="M -22 10 Q -25 0 -20 -3 L -19 0 Q -22 5 -20 10 Z" fill="#111a24" />
+                <path d="M 22 10 Q 25 0 20 -3 L 19 0 Q 22 5 20 10 Z" fill="#111a24" />
+              </g>
               <text x={benchMap.x + 18} y={benchMap.y + 4} fill="#ffffff" fontSize="10" fontFamily="sans-serif" fontWeight="bold" filter="drop-shadow(1px 1px 1px rgba(0,0,0,0.8))">BENCH</text>
             </>
           )}
 
           {hasTeleported && (
             <>
-              {/* Floating Island (Organic Satellite Top-Down) */}
+              {/* Floating Island (2D White Dashed Blueprint Path) */}
               <path 
                 d={`M ${islandMap.x - 70} ${islandMap.y - 20} 
                     C ${islandMap.x - 80} ${islandMap.y - 60}, ${islandMap.x - 20} ${islandMap.y - 90}, ${islandMap.x + 30} ${islandMap.y - 70} 
                     C ${islandMap.x + 80} ${islandMap.y - 50}, ${islandMap.x + 90} ${islandMap.y + 20}, ${islandMap.x + 50} ${islandMap.y + 60} 
                     C ${islandMap.x + 10} ${islandMap.y + 90}, ${islandMap.x - 50} ${islandMap.y + 70}, ${islandMap.x - 70} ${islandMap.y - 20} Z`} 
-                fill="url(#islandTerrain)" 
+                fill="rgba(255, 255, 255, 0.05)" 
+                stroke="#ffffff"
+                strokeWidth="2"
+                strokeDasharray="6,4"
               />
               
               {/* Skills Shelf */}
-              <rect x={islandMap.x + 15} y={islandMap.y - 35} width="20" height="8" fill="#475569" rx="1" />
-              <rect x={islandMap.x + 16} y={islandMap.y - 34} width="18" height="6" fill="#94a3b8" />
+              <rect x={islandMap.x + 15} y={islandMap.y - 35} width="20" height="8" fill="transparent" stroke="#ffffff" strokeWidth="1.5" />
+              <rect x={islandMap.x + 16} y={islandMap.y - 34} width="18" height="6" fill="rgba(255, 255, 255, 0.2)" />
               
               {/* Teleport Pad */}
-              <circle cx={islandMap.x + 25} cy={islandMap.y - 15} r="8" fill="#06b6d4" stroke="#cffafe" strokeWidth="1" />
+              <circle cx={islandMap.x + 25} cy={islandMap.y - 15} r="8" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" strokeWidth="1.5" strokeDasharray="2,2" />
               
               <text x={islandMap.x - 20} y={islandMap.y - 45} fill="#ffffff" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" filter="drop-shadow(1px 1px 1px rgba(0,0,0,0.8))">ISLAND</text>
             </>
