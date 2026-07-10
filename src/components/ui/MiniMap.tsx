@@ -112,26 +112,60 @@ export function MiniMap() {
 
           {hasTeleported && (
             <>
-              {/* Floating Island (2D White Dashed Blueprint Path) */}
+              {/* Main Island */}
               <path 
-                d={`M ${islandMap.x - 70} ${islandMap.y - 20} 
-                    C ${islandMap.x - 80} ${islandMap.y - 60}, ${islandMap.x - 20} ${islandMap.y - 90}, ${islandMap.x + 30} ${islandMap.y - 70} 
-                    C ${islandMap.x + 80} ${islandMap.y - 50}, ${islandMap.x + 90} ${islandMap.y + 20}, ${islandMap.x + 50} ${islandMap.y + 60} 
-                    C ${islandMap.x + 10} ${islandMap.y + 90}, ${islandMap.x - 50} ${islandMap.y + 70}, ${islandMap.x - 70} ${islandMap.y - 20} Z`} 
-                fill="rgba(255, 255, 255, 0.05)" 
-                stroke="#ffffff"
-                strokeWidth="2"
-                strokeDasharray="6,4"
+                d={`M ${islandMap.x - 40} ${islandMap.y - 15} 
+                    C ${islandMap.x - 50} ${islandMap.y - 40}, ${islandMap.x - 10} ${islandMap.y - 60}, ${islandMap.x + 20} ${islandMap.y - 45} 
+                    C ${islandMap.x + 50} ${islandMap.y - 30}, ${islandMap.x + 60} ${islandMap.y + 15}, ${islandMap.x + 30} ${islandMap.y + 40} 
+                    C ${islandMap.x + 5} ${islandMap.y + 60}, ${islandMap.x - 30} ${islandMap.y + 45}, ${islandMap.x - 40} ${islandMap.y - 15} Z`} 
+                fill="rgba(14, 165, 233, 0.05)" 
+                stroke="#38bdf8"
+                strokeWidth="1.5"
+                strokeDasharray="4,3"
               />
+
+              {/* Projects Island (Right side) */}
+              <path 
+                d={`M ${islandMap.x + 70} ${islandMap.y - 25} 
+                    C ${islandMap.x + 60} ${islandMap.y - 40}, ${islandMap.x + 90} ${islandMap.y - 50}, ${islandMap.x + 105} ${islandMap.y - 20} 
+                    C ${islandMap.x + 115} ${islandMap.y + 10}, ${islandMap.x + 90} ${islandMap.y + 30}, ${islandMap.x + 75} ${islandMap.y + 10} Z`}
+                fill="rgba(244, 63, 94, 0.05)"
+                stroke="#fb7185"
+                strokeWidth="1.5"
+                strokeDasharray="4,3"
+              />
+
+              {/* Media Island (Top Right side) */}
+              <path 
+                d={`M ${islandMap.x + 20} ${islandMap.y - 75} 
+                    C ${islandMap.x + 10} ${islandMap.y - 95}, ${islandMap.x + 40} ${islandMap.y - 110}, ${islandMap.x + 60} ${islandMap.y - 85} 
+                    C ${islandMap.x + 75} ${islandMap.y - 60}, ${islandMap.x + 45} ${islandMap.y - 45}, ${islandMap.x + 30} ${islandMap.y - 60} Z`}
+                fill="rgba(168, 85, 247, 0.05)"
+                stroke="#c084fc"
+                strokeWidth="1.5"
+                strokeDasharray="4,3"
+              />
+
+              {/* Bridges */}
+              {/* Main to Projects */}
+              <path d={`M ${islandMap.x + 40} ${islandMap.y + 5} L ${islandMap.x + 75} ${islandMap.y - 5}`} stroke="#94a3b8" strokeWidth="4" strokeDasharray="2,2" opacity="0.6"/>
+              {/* Main to Media */}
+              <path d={`M ${islandMap.x + 20} ${islandMap.y - 40} L ${islandMap.x + 35} ${islandMap.y - 70}`} stroke="#94a3b8" strokeWidth="4" strokeDasharray="2,2" opacity="0.6"/>
+
+              {/* Board on Projects Island */}
+              <rect x={islandMap.x + 80} y={islandMap.y - 20} width="16" height="8" fill="transparent" stroke="#fb7185" strokeWidth="1.5" transform={`rotate(-15 ${islandMap.x + 88} ${islandMap.y - 16})`} />
               
-              {/* Skills Shelf */}
-              <rect x={islandMap.x + 15} y={islandMap.y - 35} width="20" height="8" fill="transparent" stroke="#ffffff" strokeWidth="1.5" />
-              <rect x={islandMap.x + 16} y={islandMap.y - 34} width="18" height="6" fill="rgba(255, 255, 255, 0.2)" />
+              {/* Gem on Media Island */}
+              <polygon points={`${islandMap.x + 45},${islandMap.y - 85} ${islandMap.x + 50},${islandMap.y - 80} ${islandMap.x + 45},${islandMap.y - 75} ${islandMap.x + 40},${islandMap.y - 80}`} fill="transparent" stroke="#c084fc" strokeWidth="1.5" />
+
+              {/* Skills Shelf on Main Island */}
+              <rect x={islandMap.x - 10} y={islandMap.y - 25} width="20" height="8" fill="transparent" stroke="#38bdf8" strokeWidth="1.5" />
+              <rect x={islandMap.x - 9} y={islandMap.y - 24} width="18" height="6" fill="rgba(56, 189, 248, 0.2)" />
               
               {/* Teleport Pad */}
-              <circle cx={islandMap.x + 25} cy={islandMap.y - 15} r="8" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" strokeWidth="1.5" strokeDasharray="2,2" />
+              <circle cx={islandMap.x + 5} cy={islandMap.y + 15} r="6" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" strokeWidth="1.5" strokeDasharray="2,2" />
               
-              <text x={islandMap.x - 20} y={islandMap.y - 45} fill="#ffffff" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" filter="drop-shadow(1px 1px 1px rgba(0,0,0,0.8))">ISLAND</text>
+              <text x={islandMap.x - 20} y={islandMap.y - 45} fill="#ffffff" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" filter="drop-shadow(1px 1px 1px rgba(0,0,0,0.8))">ISLANDS</text>
             </>
           )}
 
